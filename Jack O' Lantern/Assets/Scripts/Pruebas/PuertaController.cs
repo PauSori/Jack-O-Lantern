@@ -5,7 +5,7 @@ using UnityEngine;
 public class PuertaController : MonoBehaviour
 {
     private Animator animator;
-    public List<> enemys;
+    public 
     // Start is called before the first frame update
     void Start()
     {
