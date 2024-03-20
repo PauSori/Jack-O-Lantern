@@ -14,15 +14,21 @@ public class AIState : MonoBehaviour
     public float meleeRange;
     public float midRange;
     public float longRange;
+    public bool isInMeleeRange = false;
+    public bool isInMidRange = false;
+    public bool isInLongRange = false;
+    private float distanceToPlayer;
     private Transform playerTransform;
-    private bool isInMeleeRange = false;
-    private bool isInMidRange = false;
-    private bool isInLongRange = false;
 
     [Header("BossChase")]
     public Transform player;
     public float speed = 5.0f;
     private Vector3 direction;
+    private float chaosFactor = 2f;
+
+    [Header("MeleeAttack")]
+    public Collider attackCollider;
+
 
     [Header("Tombs Settings")]
     public List<GameObject> tombs;
@@ -32,7 +38,7 @@ public class AIState : MonoBehaviour
     {
         currentHP = maxHP;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        
+        attackCollider.enabled = false;
     }
 
     private void Update()
@@ -63,6 +69,10 @@ public class AIState : MonoBehaviour
         {
             Chase();
         }
+        //if (isInMeleeRange)
+        //{
+        //    MeleeAttack();
+        //}
     }
 
     void HalfLifeState()
@@ -77,46 +87,60 @@ public class AIState : MonoBehaviour
     {
         direction = (player.position - transform.position).normalized;
 
-        // Add a diagonal movement
-        direction += new Vector3(Mathf.Sin(Time.time), 0, Mathf.Cos(Time.time));
+       
+        direction += new Vector3(Mathf.Sin(Time.time * chaosFactor), 0, Mathf.Cos(Time.time * chaosFactor));
 
-        // Normalize the direction
+        
         direction = direction.normalized;
 
-        // Move the enemy
+        
         transform.position += direction * speed * Time.deltaTime;
+
     }
+    //void MeleeAttack()
+    //{
+    //    attackCollider.enabled = true;
+
+    //    // Desactiva el collider después de 1 segundo
+    //    Invoke("DeactivateAttack", 1.0f);
+    //}
+    //void DeactivateAttack()
+    //{
+    //    // Desactiva el collider
+    //    attackCollider.enabled = false;
+    //}
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    // Comprueba si el collider tocado tiene el tag "Player"
+    //    if (other.gameObject.CompareTag("Player"))
+    //    {
+    //        Debug.Log("El jugador ha sido tocado por el ataque");
+    //    }
+    //}
     public void CheckForRanges()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+        isInMeleeRange = false;
+        isInMidRange = false;
+        isInLongRange = false;
 
         if (distanceToPlayer <= meleeRange)
         {
             isInMeleeRange = true;
-            isInMidRange = false;
-            isInLongRange = false;
             // Implementa aquí la lógica de ataque cuerpo a cuerpo
         }
         else if (distanceToPlayer <= midRange)
         {
-            isInMeleeRange = false;
             isInMidRange = true;
-            isInLongRange = false;
             // Implementa aquí la lógica de ataque a media distancia
         }
         else if (distanceToPlayer <= longRange)
         {
-            isInMeleeRange = false;
-            isInMidRange = false;
             isInLongRange = true;
             // Implementa aquí la lógica de ataque a larga distancia
         }
-        else
-        {
-            isInMeleeRange = false;
-            isInMidRange = false;
-            isInLongRange = false;
-        }
+        
     }
     void UpdateTombs()
     {
