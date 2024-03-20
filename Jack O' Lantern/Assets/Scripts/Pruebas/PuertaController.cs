@@ -15,9 +15,9 @@ public class PuertaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if()
-        {
-            animator.SetBool("Open", true);
-        }
+        //if()
+        //{
+        //    animator.SetBool("Open", true);
+        //}
     }
 }
