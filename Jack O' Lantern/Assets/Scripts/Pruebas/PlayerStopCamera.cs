@@ -6,7 +6,7 @@ public class PlayerStopCamera : MonoBehaviour
 {
     public bool cameraBool = false;
     public GameObject cameraObject;
-    public CharacterController characterController;
+    private CharacterController characterController;
 
     private void Start()
     {
