@@ -9,6 +9,7 @@ public class AIState : MonoBehaviour
     [Header("Health Settings")]
     public float maxHP = 100f;
     public float currentHP;
+    int previousHP;
 
     [Header("Detection Ranges")]
     public float meleeRange;
@@ -29,6 +30,9 @@ public class AIState : MonoBehaviour
     [Header("MeleeAttack")]
     public Collider attackCollider;
 
+    [Header("InvokeSettings")]
+    public GameObject enemyPrefab;
+    private System.Random random = new System.Random();
 
     [Header("Tombs Settings")]
     public List<GameObject> tombs;
@@ -57,32 +61,154 @@ public class AIState : MonoBehaviour
 
     public void CheckStates()
     {
-        if(currentHP > maxHP / 2)
-        {
-            FullLifeState();
-        }
         if (currentHP <= maxHP / 2)
         {
-            HalfLifeState();
+            if (CheckForTombs() == true) 
+            {
+                TeleportToTomb();
+            }
+            else
+            {
+                if (isInLongRange)
+                {
+                    if (CheckForMaxPumpkins())
+                    {
+                        if (isInMeleeRange)
+                        {
+                            if (CheckHealthDrop() == true)
+                            {
+                                Dash();
+                            }
+                            else
+                            {
+                                MeleeAttack();
+                                Dash();
+                            }
+                        }
+                        else
+                        {
+                            Chase();
+                        }
+                    }
+                    else
+                    {
+                        InvokeEnemies();
+                    }
+                }
+                else
+                {
+                    if (isInMeleeRange)
+                    {
+                        if (CheckHealthDrop())
+                        {
+                            Dash();
+                        }
+                        else
+                        {
+                            MeleeAttack();
+                            Dash();
+                        }
+                    }
+                }
+            }
         }
-        if (isInMidRange)
+        else
         {
-            Chase();
+            if (isInMidRange)
+            {
+                if (isInMeleeRange)
+                {
+                    if (CheckHealthDrop())
+                    {
+                        Dash();
+                    }
+                    else
+                    {
+                        MeleeAttack();
+                        Dash();
+                    }
+                }
+                else
+                {
+                    Chase();
+                }
+            }
+            else
+            {
+                if (CheckForMaxPumpkins())
+                {
+                    if (isInMeleeRange)
+                    {
+                        if (CheckHealthDrop())
+                        {
+                            Dash();
+                        }
+                        else
+                        {
+                          MeleeAttack();
+                          Dash(); 
+                        }
+                    }
+                }
+                else
+                {
+                    InvokeEnemies();
+                }
+            }
         }
-        //if (isInMeleeRange)
-        //{
-        //    MeleeAttack();
-        //}
     }
 
-    void HalfLifeState()
+
+    private bool AttackSucces()
     {
-        CheckForTombs();
+        throw new NotImplementedException();
     }
-    void FullLifeState() 
+
+    private void Dash()
     {
-        CheckForRanges();
+        throw new NotImplementedException();
     }
+
+    private bool CheckForMaxPumpkins()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("JackPumpkin");
+
+        // Si hay 6 o más enemigos, devuelve true
+        if (enemies.Length >= 6)
+        {
+            return true;
+        }
+        // Si no hay enemigos, devuelve false
+        else if (enemies.Length == 0)
+        {
+            return false;
+        }
+        // En cualquier otro caso, puedes decidir qué hacer
+        else
+        {
+            return false; // o true, dependiendo de lo que quieras
+        }
+    }
+
+    private void MeleeAttack()
+    {
+    }
+
+    IEnumerator InvokeEnemies()
+    {
+        GetComponent<CharacterController>().enabled = false;
+        // Espera 3 segundos
+        yield return new WaitForSeconds(3);
+
+        // Invoca entre 2 y 3 enemigos
+        int numEnemies = random.Next(2, 4);
+        for (int i = 0; i < numEnemies; i++)
+        {
+            Instantiate(enemyPrefab, transform.position + Vector3.up * (i + 1), Quaternion.identity);
+        }
+        GetComponent<CharacterController>().enabled = true;
+    }
+
     void Chase()
     {
         direction = (player.position - transform.position).normalized;
@@ -97,26 +223,6 @@ public class AIState : MonoBehaviour
         transform.position += direction * speed * Time.deltaTime;
 
     }
-    //void MeleeAttack()
-    //{
-    //    attackCollider.enabled = true;
-
-    //    // Desactiva el collider después de 1 segundo
-    //    Invoke("DeactivateAttack", 1.0f);
-    //}
-    //void DeactivateAttack()
-    //{
-    //    // Desactiva el collider
-    //    attackCollider.enabled = false;
-    //}
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    // Comprueba si el collider tocado tiene el tag "Player"
-    //    if (other.gameObject.CompareTag("Player"))
-    //    {
-    //        Debug.Log("El jugador ha sido tocado por el ataque");
-    //    }
-    //}
     public void CheckForRanges()
     {
         distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
@@ -141,6 +247,19 @@ public class AIState : MonoBehaviour
             // Implementa aquí la lógica de ataque a larga distancia
         }
         
+    }
+    bool CheckHealthDrop()
+    {
+        if (previousHP - currentHP >= 30) // Si la salud ha disminuido en 30 o más
+        {
+            // Aquí puedes agregar el comportamiento que quieras cuando se cumpla esta condición
+            Debug.Log("El personaje ha perdido 30 o más puntos de vida");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     void UpdateTombs()
     {
@@ -169,17 +288,18 @@ public class AIState : MonoBehaviour
         isTeleporting = false;  // Establece isTeleporting a false al final de la corrutina
     }
 
-    public void CheckForTombs()
+    public bool CheckForTombs()
     {
         UpdateTombs();
 
         if (tombs.Count > 0 && !isTeleporting)  // Comprueba si isTeleporting es false antes de iniciar la corrutina
         {
             StartCoroutine(TeleportToTomb());
+            return true;
         }
         else
         {
-            //CheckSummonRange();
+            return false;
         }
     }
     void OnDrawGizmosSelected()
