@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2a10c2d8d1dbc924986c617409372a57, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 5036d8dcb6114b346a03dc4f5cfc975a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0005588518, g: 0.0038070646, b: 0.014137276, a: 1}
+  m_IndirectSpecularColor: {r: 0.011453551, g: 0.0135128815, b: 0.017960811, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1626,6 +1626,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WF_LP_HT_Build_Fountain
       objectReference: {fileID: 0}
+    - target: {fileID: 3884387646294707517, guid: 12772ea189fb44e4283d25c63122be95,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c2a84f1fbe1859d41a0ecb9ac1007412, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5212,7 +5217,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c2a84f1fbe1859d41a0ecb9ac1007412, type: 2}
+      objectReference: {fileID: 2100000, guid: ce79a258b6a4fcb4489235b751b311df, type: 2}
     - target: {fileID: 3639002540073550387, guid: d96f2edffe352c549889e574e1b890b5,
         type: 3}
       propertyPath: m_Name
