@@ -240,7 +240,6 @@ public class EnemyController : MonoBehaviour
         if (enemyState == MovementStates.Chase)
             return;
         agent.SetDestination(transform.position);
-
         Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
 
         Quaternion lookRotation = Quaternion.LookRotation(targetPosition - transform.position);
@@ -250,6 +249,7 @@ public class EnemyController : MonoBehaviour
         if (!alreadyAttack)
         {
             attackCounter++;
+            Debug.Log("Atacando");
             if (attackCounter > 3)
                 attackCounter = 0;
 
