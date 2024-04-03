@@ -104,7 +104,7 @@ public class EnemyController : MonoBehaviour
                 agent.angularSpeed = 250;
 
                 attackCounter = 0;
-                anim.SetInteger("attack", attackCounter);
+                //anim.SetInteger("attack", attackCounter);
                 break;
             case MovementStates.Attack:
                 break;
@@ -194,7 +194,7 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        anim.SetFloat("Speed", enemySpeed);
+        //anim.SetFloat("Speed", enemySpeed);
     }
 
     private void SearchPatrolPoint()
@@ -220,7 +220,7 @@ public class EnemyController : MonoBehaviour
             enemySpeed += acceleration * Time.deltaTime;
         else
             enemySpeed = 0.85f;
-        anim.SetFloat("Speed", enemySpeed);
+       // anim.SetFloat("Speed", enemySpeed);
     }
 
 
@@ -253,7 +253,7 @@ public class EnemyController : MonoBehaviour
             if (attackCounter > 3)
                 attackCounter = 0;
 
-            anim.SetInteger("attack", attackCounter);
+           // anim.SetInteger("attack", attackCounter);
 
             //Debug.Log("Attacking player");
             alreadyAttack = true;
@@ -264,7 +264,7 @@ public class EnemyController : MonoBehaviour
             enemySpeed -= deceleration * 2 * Time.deltaTime;
         else
             enemySpeed = 0;
-        anim.SetFloat("Speed", enemySpeed);
+       // anim.SetFloat("Speed", enemySpeed);
 
     }
 
