@@ -38,7 +38,7 @@ public class AIState : MonoBehaviour
     public Collider attackCollider;
     #endregion
 
-    #region Invoke Settings
+    #region InvokeEnemy Settings
     [Header("InvokeSettings")]
     public GameObject enemyPrefab;
     private System.Random random = new System.Random();
@@ -49,6 +49,10 @@ public class AIState : MonoBehaviour
     public List<GameObject> tombs;
     private bool isTeleporting = false;  // Nueva variable
     #endregion
+
+    //COSAS QUE FALTAN
+    //ATAQUE
+    //SALTO HACIA ATRAS
 
     public void Start()
     {
@@ -189,13 +193,6 @@ public class AIState : MonoBehaviour
             }
         }
     }
-
-
-    private bool AttackSucces()
-    {
-        throw new NotImplementedException();
-    }
-
     private void Dash()
     {
         throw new NotImplementedException();
@@ -230,7 +227,6 @@ public class AIState : MonoBehaviour
 
     IEnumerator InvokeEnemies()
     {
-        GetComponent<CharacterController>().enabled = false;
         // Espera 3 segundos
         yield return new WaitForSeconds(3);
 
@@ -240,7 +236,6 @@ public class AIState : MonoBehaviour
         {
             Instantiate(enemyPrefab, transform.position + Vector3.up * (i + 1), Quaternion.identity);
         }
-        GetComponent<CharacterController>().enabled = true;
     }
 
     void Chase()
