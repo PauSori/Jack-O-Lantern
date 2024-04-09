@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8999094720709718379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: MyAssaultRifle
+  m_EditorClassIdentifier: 
+  m_ID: 0
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs:
+  - {fileID: 3056352257377300348, guid: a0ab6d43c6d245e48a59d96efd7d2382, type: 3}
+--- !u!114 &-2744617516154777366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: hammer
+  m_EditorClassIdentifier: 
+  m_ID: 4
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs:
+  - {fileID: 8283673471715226650, guid: 4adf26fc60a122e45943a615ff5acef8, type: 3}
+--- !u!114 &-1716537533568632583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: MyAssaultRifleBullet
+  m_EditorClassIdentifier: 
+  m_ID: 1
+  m_CategoryIDs: 
+  m_Capacity: 2147483647
+  m_Prefabs: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd29761419510c7469e993b29ea117d8, type: 3}
+  m_Name: MyItemCollection
+  m_EditorClassIdentifier: 
+  m_Categories:
+  - {fileID: 9028155499053686892}
+  m_ItemTypes:
+  - {fileID: -8999094720709718379}
+  - {fileID: -1716537533568632583}
+  - {fileID: 6979164572967840667}
+  - {fileID: 8206190366130190450}
+  - {fileID: -2744617516154777366}
+--- !u!114 &6979164572967840667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: mysword
+  m_EditorClassIdentifier: 
+  m_ID: 2
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs:
+  - {fileID: 5250007573829895044, guid: a9ca6b00aadd62e4cb2094e8cd689bb5, type: 3}
+--- !u!114 &8206190366130190450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: hacha
+  m_EditorClassIdentifier: 
+  m_ID: 3
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs:
+  - {fileID: 136000437440575316, guid: 7c09ebd20eb87bd42a003e06a39f711c, type: 3}
+--- !u!114 &9028155499053686892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee2c1a75ff367a42ba5f16bd97e5519, type: 3}
+  m_Name: Items
+  m_EditorClassIdentifier: 
+  m_ID: 1905161318
