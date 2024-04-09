@@ -17,6 +17,7 @@ public class Fueguin : MonoBehaviour
     public LayerMask objects;
     public bool areEnemiesNearby = false;
     public Collider closestEnemy = null;
+    private Collider closestObject;
 
     void Update()
     {
@@ -32,20 +33,37 @@ public class Fueguin : MonoBehaviour
                 if (CheckEnemy() == true)
                 {
                     Stun();
+                    FollowEnemy(); // Mueve hacia el enemigo aquí
+                }
+                else
+                {
+                    FollowPlayer(); // Si no hay enemigos, sigue al jugador
                 }
             }
-            FollowPlayer(); // Mueve esta línea aquí
         }
         else
         {
             if (CheckObjectInArea() == true)
             {
-                //FueguinPointing();
+                FollowObject();
             }
             else
             {
                 FollowPlayer();
             }
+        }
+    }
+
+    private void FollowObject()
+    {
+        if (closestObject != null)
+        {
+            Vector3 newPos = closestObject.transform.position + offset;
+            transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
+        }
+        else
+        {
+            FollowPlayer(); // Si el objeto desaparece, sigue al jugador
         }
     }
 
@@ -90,7 +108,9 @@ public class Fueguin : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Objeto"))
         {
+            //if layer == enemy crides a checkenemy
             Debug.Log("Objeto detectado!");
+            // CheckEnemy();
             objectInArea = true;
         }
     }
@@ -106,7 +126,7 @@ public class Fueguin : MonoBehaviour
     private bool CheckObjectInArea()
     {
         Collider[] Object = Physics.OverlapSphere(transform.position, detectionObjectRadius, objects);
-        Debug.Log("Caja");
+        //Debug.Log("Caja");
         return objectInArea;
     }
 
@@ -115,6 +135,19 @@ public class Fueguin : MonoBehaviour
         Vector3 newPos = player.position + offset;
 
         transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
+    }
+
+    private void FollowEnemy()
+    {
+        if (closestEnemy != null)
+        {
+            Vector3 newPos = closestEnemy.transform.position + offset;
+            transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
+        }
+        else
+        {
+            FollowPlayer(); // Si el enemigo desaparece, sigue al jugador
+        }
     }
 
     public bool CheckCombatState()
@@ -151,3 +184,6 @@ public class Fueguin : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, detectionObjectRadius);
     }
 }
+
+//Podran haber problemas
+//Como que Fueguin se puede ir a un enemigo sin que te des cuenta y que se quede ahi para siempre hasta que lo mates
