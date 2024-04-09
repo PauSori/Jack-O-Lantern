@@ -5,17 +5,22 @@ using UnityEngine;
 
 public class Fueguin : MonoBehaviour
 {
-    public Transform player; // El personaje principal
-    public float speed = 2.0f; // La velocidad a la que el fuego fatuo sigue al personaje principal
-    public Vector3 offset = new Vector3(1, 0, 0); // El desplazamiento desde el personaje principal
+    public Transform player;
+    public float speed = 2.0f;
+    public Vector3 offset = new Vector3(1, 0, 0);
     public bool CheckCombat = false;
     public bool objectInArea = false;
+    private bool isCooldown = false;
+    public float detectionRadius = 8.0f;
+    public float detectionObjectRadius = 18.0f;
+    public LayerMask Enemy;
+    public LayerMask objects;
+    public bool areEnemiesNearby = false;
+    public Collider closestEnemy = null;
 
     void Update()
     {
-        FollowPlayer();
         CheckStates();
-
     }
 
     void CheckStates()
@@ -24,77 +29,85 @@ public class Fueguin : MonoBehaviour
         {
             if (CheckCD() == false)
             {
-                FollowPlayer();
-            }
-            else
-            {
-                
                 if (CheckEnemy() == true)
                 {
                     Stun();
                 }
-                else
-                {
-                    FollowPlayer();
-
-                }
             }
+            FollowPlayer(); // Mueve esta línea aquí
         }
         else
         {
             if (CheckObjectInArea() == true)
             {
-                FueguinPointing();
+                //FueguinPointing();
             }
             else
             {
                 FollowPlayer();
             }
         }
-      
     }
 
-    private void FueguinPointing()
+    private bool CheckEnemy()
     {
-        
+        Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius, Enemy);
+
+        if (enemies.Length > 0)
+        {
+            areEnemiesNearby = true;
+            float closestDistanceSqr = Mathf.Infinity;
+
+            foreach (Collider enemy in enemies)
+            {
+                Vector3 directionToEnemy = enemy.transform.position - transform.position;
+                float dSqrToEnemy = directionToEnemy.sqrMagnitude;
+
+                if (dSqrToEnemy < closestDistanceSqr)
+                {
+                    closestDistanceSqr = dSqrToEnemy;
+                    closestEnemy = enemy;
+                }
+            }
+
+            Debug.Log("El enemigo más cercano es: " + closestEnemy.gameObject.name);
+        }
+        else
+        {
+            areEnemiesNearby = false;
+            closestEnemy = null;
+        }
+
+        return areEnemiesNearby;
+    }
+
+    private bool CheckCD()
+    {
+        return isCooldown;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // Comprueba si el objeto que entró en el área es el que estás buscando
         if (other.gameObject.CompareTag("Objeto"))
         {
             Debug.Log("Objeto detectado!");
             objectInArea = true;
         }
     }
+
     void OnTriggerExit(Collider other)
     {
-        // Comprueba si el objeto que salió del área es el que estás buscando
         if (other.gameObject.CompareTag("Objeto"))
         {
-            Debug.Log("Objeto se ha ido!");
             objectInArea = false;
         }
     }
+
     private bool CheckObjectInArea()
     {
+        Collider[] Object = Physics.OverlapSphere(transform.position, detectionObjectRadius, objects);
+        Debug.Log("Caja");
         return objectInArea;
-    }
-
-    private void Stun()
-    {
-        
-    }
-
-    private bool CheckEnemy()
-    {
-        throw new NotImplementedException();
-    }
-
-    private bool CheckCD()
-    {
-        throw new NotImplementedException();
     }
 
     private void FollowPlayer()
@@ -108,12 +121,33 @@ public class Fueguin : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            // Cambia el valor de CheckCombat
             CheckCombat = !CheckCombat;
-
         }
         return CheckCombat;
     }
 
+    private IEnumerator Cooldown()
+    {
+        isCooldown = true;
+        yield return new WaitForSeconds(5);
+        isCooldown = false;
+    }
 
+    private void Stun()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartCoroutine(Cooldown());
+            FollowPlayer(); // Agrega esta línea
+        }
+    }
+    void OnDrawGizmosSelected()
+    {
+        // Dibuja una esfera roja para el rango melee
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, detectionObjectRadius);
+    }
 }
