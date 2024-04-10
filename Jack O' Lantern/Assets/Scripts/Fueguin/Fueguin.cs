@@ -14,10 +14,11 @@ public class Fueguin : MonoBehaviour
     public float detectionRadius = 8.0f;
     public float detectionObjectRadius = 18.0f;
     public LayerMask Enemy;
-    public LayerMask objects;
+    public LayerMask Objeto;
     public bool areEnemiesNearby = false;
     public Collider closestEnemy = null;
     private Collider closestObject;
+    public GameObject Player; //NUEVO IMPLEMENTADO
 
     void Update()
     {
@@ -53,6 +54,7 @@ public class Fueguin : MonoBehaviour
             }
         }
     }
+
 
     private void FollowObject()
     {
@@ -108,10 +110,10 @@ public class Fueguin : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Objeto"))
         {
-            //if layer == enemy crides a checkenemy
             Debug.Log("Objeto detectado!");
-            // CheckEnemy();
             objectInArea = true;
+            closestObject = other; // Asigna el objeto más cercano
+            FollowObject(); // Mueve tu objeto hacia el objeto detectado
         }
     }
 
@@ -119,13 +121,15 @@ public class Fueguin : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Objeto"))
         {
+            closestObject = null; // Resetea el objeto más cercano cuando sale del radio
             objectInArea = false;
         }
     }
 
+
     private bool CheckObjectInArea()
     {
-        Collider[] Object = Physics.OverlapSphere(transform.position, detectionObjectRadius, objects);
+        Collider[] Object = Physics.OverlapSphere(Player.transform.position, detectionObjectRadius, Objeto); //Nuevo Player./....
         //Debug.Log("Caja");
         return objectInArea;
     }
@@ -184,6 +188,3 @@ public class Fueguin : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, detectionObjectRadius);
     }
 }
-
-//Podran haber problemas
-//Como que Fueguin se puede ir a un enemigo sin que te des cuenta y que se quede ahi para siempre hasta que lo mates

@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 199184421}
   - component: {fileID: 199184420}
   - component: {fileID: 199184419}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Objeto
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 278771183}
   - component: {fileID: 278771182}
   - component: {fileID: 278771181}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Objeto
   m_Icon: {fileID: 0}
@@ -392,11 +392,12 @@ MonoBehaviour:
   Enemy:
     serializedVersion: 2
     m_Bits: 67108864
-  objects:
+  Objeto:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   areEnemiesNearby: 0
   closestEnemy: {fileID: 1919204420}
+  Player: {fileID: 1056011114}
 --- !u!135 &384869249
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1073,7 +1074,7 @@ GameObject:
   - component: {fileID: 2027582613}
   - component: {fileID: 2027582612}
   - component: {fileID: 2027582611}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Objeto
   m_Icon: {fileID: 0}
@@ -1095,7 +1096,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
