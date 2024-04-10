@@ -17,7 +17,7 @@ MonoBehaviour:
   m_Capacity: 2147483647
   m_Prefabs:
   - {fileID: 3056352257377300348, guid: a0ab6d43c6d245e48a59d96efd7d2382, type: 3}
---- !u!114 &-2744617516154777366
+--- !u!114 &-2425753834364338727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,8 +68,43 @@ MonoBehaviour:
   - {fileID: -8999094720709718379}
   - {fileID: -1716537533568632583}
   - {fileID: 6979164572967840667}
-  - {fileID: 8206190366130190450}
-  - {fileID: -2744617516154777366}
+  - {fileID: 3233532126975444581}
+  - {fileID: -2425753834364338727}
+  - {fileID: 4339429099134251468}
+--- !u!114 &3233532126975444581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: otherSword
+  m_EditorClassIdentifier: 
+  m_ID: 3
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs:
+  - {fileID: 4272409215056835508, guid: 84b71342851d48c479e9cc6f62f94a00, type: 3}
+--- !u!114 &4339429099134251468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: hacha
+  m_EditorClassIdentifier: 
+  m_ID: 5
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs:
+  - {fileID: 6133136894228551691, guid: 7c09ebd20eb87bd42a003e06a39f711c, type: 3}
 --- !u!114 &6979164572967840667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,23 +122,6 @@ MonoBehaviour:
   m_Capacity: 2147483647
   m_Prefabs:
   - {fileID: 5250007573829895044, guid: a9ca6b00aadd62e4cb2094e8cd689bb5, type: 3}
---- !u!114 &8206190366130190450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
-  m_Name: hacha
-  m_EditorClassIdentifier: 
-  m_ID: 3
-  m_CategoryIDs: 66748e71
-  m_Capacity: 2147483647
-  m_Prefabs:
-  - {fileID: 136000437440575316, guid: 7c09ebd20eb87bd42a003e06a39f711c, type: 3}
 --- !u!114 &9028155499053686892
 MonoBehaviour:
   m_ObjectHideFlags: 0
