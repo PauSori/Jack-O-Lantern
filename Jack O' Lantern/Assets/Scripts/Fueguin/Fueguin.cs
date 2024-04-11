@@ -13,20 +13,26 @@ public class Fueguin : MonoBehaviour
     private bool isCooldown = false;
     public float detectionRadius = 8.0f;
     public float detectionObjectRadius = 18.0f;
+    public float maxDistanceFromPlayer = 30.0f;
     public LayerMask Enemy;
     public LayerMask Objeto;
     public bool areEnemiesNearby = false;
-    public Collider closestEnemy = null;
+    private Collider closestEnemy = null;
     private Collider closestObject;
-    public GameObject Player; //NUEVO IMPLEMENTADO
+    public GameObject Player; // NUEVO IMPLEMENTADO // Nueva variable para la distancia máxima
+
+
 
     void Update()
     {
         CheckStates();
+
     }
 
     void CheckStates()
     {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
         if (CheckCombatState() == true)
         {
             if (CheckCD() == false)
@@ -34,11 +40,11 @@ public class Fueguin : MonoBehaviour
                 if (CheckEnemy() == true)
                 {
                     Stun();
-                    FollowEnemy(); // Mueve hacia el enemigo aquí
+                    FollowEnemy();
                 }
                 else
                 {
-                    FollowPlayer(); // Si no hay enemigos, sigue al jugador
+                    FollowPlayer();
                 }
             }
         }
@@ -50,6 +56,7 @@ public class Fueguin : MonoBehaviour
             }
             else
             {
+                Debug.Log("LLendo al player");
                 FollowPlayer();
             }
         }
@@ -65,7 +72,7 @@ public class Fueguin : MonoBehaviour
         }
         else
         {
-            FollowPlayer(); // Si el objeto desaparece, sigue al jugador
+            FollowPlayer();
         }
     }
 
@@ -77,28 +84,21 @@ public class Fueguin : MonoBehaviour
         {
             areEnemiesNearby = true;
             float closestDistanceSqr = Mathf.Infinity;
-
             foreach (Collider enemy in enemies)
             {
-                Vector3 directionToEnemy = enemy.transform.position - transform.position;
-                float dSqrToEnemy = directionToEnemy.sqrMagnitude;
-
-                if (dSqrToEnemy < closestDistanceSqr)
+                float distanceSqr = (enemy.transform.position - transform.position).sqrMagnitude;
+                if (distanceSqr < closestDistanceSqr)
                 {
-                    closestDistanceSqr = dSqrToEnemy;
+                    closestDistanceSqr = distanceSqr;
                     closestEnemy = enemy;
                 }
             }
-
-            Debug.Log("El enemigo más cercano es: " + closestEnemy.gameObject.name);
+            return true;
         }
         else
         {
-            areEnemiesNearby = false;
-            closestEnemy = null;
+            return false;
         }
-
-        return areEnemiesNearby;
     }
 
     private bool CheckCD()
@@ -106,38 +106,60 @@ public class Fueguin : MonoBehaviour
         return isCooldown;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Objeto"))
-        {
-            Debug.Log("Objeto detectado!");
-            objectInArea = true;
-            closestObject = other; // Asigna el objeto más cercano
-            FollowObject(); // Mueve tu objeto hacia el objeto detectado
-        }
-    }
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Objeto"))
+    //    {
+    //        Debug.Log("Objeto detectado!");
+    //        objectInArea = true;
+    //        closestObject = other; // Asigna el objeto más cercano
+    //        FollowObject(); // Mueve tu objeto hacia el objeto detectado
+    //    }
+    //}
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Objeto"))
-        {
-            closestObject = null; // Resetea el objeto más cercano cuando sale del radio
-            objectInArea = false;
-        }
-    }
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Objeto"))
+    //    {
+    //        closestObject = null; // Resetea el objeto más cercano cuando sale del radio
+    //        objectInArea = false;
+    //    }
+    //}
 
 
     private bool CheckObjectInArea()
     {
-        Collider[] Object = Physics.OverlapSphere(Player.transform.position, detectionObjectRadius, Objeto);
-        //Debug.Log("Caja");
-        return objectInArea;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        Collider[] objects = Physics.OverlapSphere(transform.position, detectionObjectRadius, Objeto);
+
+        if (objects.Length > 0 && distanceToPlayer < maxDistanceFromPlayer)
+        {
+            Debug.Log("Objeto encontrado");
+            objectInArea = true;
+            float closestDistanceSqr = Mathf.Infinity;
+            foreach (Collider obj in objects)
+            {
+                float distanceSqr = (obj.transform.position - transform.position).sqrMagnitude;
+                if (distanceSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distanceSqr;
+                    closestObject = obj;
+                }
+            }
+            return true;
+        }
+        else
+        {
+            Debug.Log("Sin objeto");
+            objectInArea = false;
+            return false;
+        }
     }
 
     private void FollowPlayer()
     {
         Vector3 newPos = player.position + offset;
-
         transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
     }
 
@@ -186,5 +208,8 @@ public class Fueguin : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, detectionObjectRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, maxDistanceFromPlayer);
     }
 }
