@@ -284,7 +284,7 @@ MonoBehaviour:
     type: 2}
   m_SlotID: 0
   m_AnimatorItemID: 22
-  m_AnimatorMovementSetID: 0
+  m_AnimatorMovementSetID: 1
   m_DominantItem: 1
   m_AllowCameraZoom: 1
   m_DropPrefab: {fileID: 0}
@@ -414,8 +414,8 @@ MonoBehaviour:
     m_MinValue: {x: -10000, y: -10000, z: -10000}
     m_MaxValue: {x: 10000, y: 10000, z: 10000}
   m_BasePositionOffset: {x: 0, y: 0, z: 0}
-  m_PositionOffset: {x: 0, y: 0, z: 0}
-  m_PositionExitOffset: {x: 0, y: 0, z: 0}
+  m_PositionOffset: {x: -0.02, y: -0.03, z: -0.04}
+  m_PositionExitOffset: {x: -0.02, y: -0.03, z: -0.04}
   m_PositionFallImpact: 0.2
   m_PositionFallImpactSoftness: 10
   m_PositionFallRetract: 2
@@ -542,7 +542,7 @@ MonoBehaviour:
     m_WaitForAnimationEvent: 0
     m_Duration: 0.05
     m_WaitForSlotEvent: 0
-  m_ForceRootMotionPosition: 0
+  m_ForceRootMotionPosition: 1
   m_ForceRootMotionRotation: 0
   m_TriggerActionModuleGroup:
     m_Modules:
@@ -604,7 +604,38 @@ MonoBehaviour:
             m_AudioClipSet:
               m_AudioConfig: {fileID: 0}
               m_AudioClips: []
-        m_AllowAttackCombos: 1
+          - m_States:
+            - m_Name: Default
+              m_Preset: {fileID: 0}
+              m_BlockList: []
+              m_Default: 1
+            m_Enabled: 1
+            m_AllowDuringMovement: 1
+            m_RequireGrounded: 0
+            m_StateName: 
+            m_ItemSubstateIndex: 3
+            m_AudioClipSet:
+              m_AudioConfig: {fileID: 0}
+              m_AudioClips: []
+          - m_States:
+            - m_Name: FirstPerson
+              m_Preset: {fileID: 11400000, guid: 561d81a64dc9ae64891e249daa52cdee,
+                type: 2}
+              m_BlockList: []
+              m_Default: 0
+            - m_Name: Default
+              m_Preset: {fileID: 0}
+              m_BlockList: []
+              m_Default: 1
+            m_Enabled: 1
+            m_AllowDuringMovement: 1
+            m_RequireGrounded: 0
+            m_StateName: 
+            m_ItemSubstateIndex: 4
+            m_AudioClipSet:
+              m_AudioConfig: {fileID: 0}
+              m_AudioClips: []
+        m_AllowAttackCombos: 0
     - rid: 5031304976696344649
       type: {class: SimpleAttack, ns: Opsive.UltimateCharacterController.Items.Actions.Modules.Melee,
         asm: Opsive.UltimateCharacterController}
@@ -791,7 +822,8 @@ MonoBehaviour:
         m_Delay: 0
         m_AllowMultiHits: 0
         m_UseContextData: 1
-        m_SurfaceImpact: {fileID: 0}
+        m_SurfaceImpact: {fileID: 11400000, guid: c5ab4290ae28ad645a9e5b3483fc05cb,
+          type: 2}
     - rid: 5031304976696344657
       type: {class: ImpactEvent, ns: Opsive.UltimateCharacterController.Items.Actions.Impact,
         asm: Opsive.UltimateCharacterController}
