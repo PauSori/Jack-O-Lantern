@@ -129,7 +129,7 @@ public class Fueguin : MonoBehaviour
 
     private bool CheckObjectInArea()
     {
-        Collider[] Object = Physics.OverlapSphere(Player.transform.position, detectionObjectRadius, Objeto); //Nuevo Player./....
+        Collider[] Object = Physics.OverlapSphere(Player.transform.position, detectionObjectRadius, Objeto);
         //Debug.Log("Caja");
         return objectInArea;
     }
