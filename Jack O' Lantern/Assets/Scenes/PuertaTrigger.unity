@@ -5251,13 +5251,10 @@ MonoBehaviour:
     m_ItemSetName: 
     m_Index: 0
   m_DefaultLoadout:
-  - ItemDefinition: {fileID: -2425753834364338727, guid: 1a382e0640df7bf4184f79e795a7f0cd,
-      type: 2}
-    Amount: 1
   - ItemDefinition: {fileID: 4339429099134251468, guid: 1a382e0640df7bf4184f79e795a7f0cd,
       type: 2}
     Amount: 1
-  - ItemDefinition: {fileID: 6979164572967840667, guid: 1a382e0640df7bf4184f79e795a7f0cd,
+  - ItemDefinition: {fileID: -2425753834364338727, guid: 1a382e0640df7bf4184f79e795a7f0cd,
       type: 2}
     Amount: 1
   m_RemoveExceptions: []
