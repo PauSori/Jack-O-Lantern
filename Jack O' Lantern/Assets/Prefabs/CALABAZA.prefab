@@ -153,6 +153,7 @@ MonoBehaviour:
   attackRange: 2.42
   playerDetected: 0
   turretMode: 1
+  slider: {fileID: 6050096456430035822}
 --- !u!136 &7275366881518960704
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -17047,11 +17047,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CALABAZA
       objectReference: {fileID: 0}
-    - target: {fileID: 2086451844144262411, guid: bb26f514254ad4042aab834094a61f5d,
-        type: 3}
-      propertyPath: m_Visible
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3653609481169338946, guid: bb26f514254ad4042aab834094a61f5d,
         type: 3}
       propertyPath: m_AnchorMax.x

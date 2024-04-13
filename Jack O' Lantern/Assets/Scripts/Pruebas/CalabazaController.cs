@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class CalabazaController : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class CalabazaController : MonoBehaviour
 
     public bool turretMode = false;
 
+    public Slider slider;
+
+
     private enum Calabaza
     {
         Patrolling,
@@ -34,6 +38,7 @@ public class CalabazaController : MonoBehaviour
 
     private void Start()
     {
+        slider = GetComponentInChildren<Slider>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentState = Calabaza.Patrolling;
@@ -57,7 +62,11 @@ public class CalabazaController : MonoBehaviour
                 Shooting();
                 break;
         }
-
+        if(slider.value <= 0)
+        {
+            Debug.Log("Muerto");
+            Destroy(gameObject);
+        }
 
     }
 
@@ -82,6 +91,11 @@ public class CalabazaController : MonoBehaviour
         else if (angleToPlayer < detectionAngle / 2f && dirToPlayer.magnitude < detectionRange && turretMode == true)
         {
             currentState = Calabaza.Shooting;
+            playerDetected = true;
+        }
+        if(slider.value < 1f)
+        {
+            currentState = Calabaza.Chasing;
             playerDetected = true;
         }
     }
