@@ -93,11 +93,17 @@ public class CalabazaController : MonoBehaviour
             currentState = Calabaza.Shooting;
             playerDetected = true;
         }
-        if(slider.value < 1f)
+        if(slider.value < 1f && Vector3.Distance(transform.position, player.position) < detectionRange && turretMode == false)
         {
             currentState = Calabaza.Chasing;
             playerDetected = true;
         }
+        if (slider.value < 1f && Vector3.Distance(transform.position, player.position) < detectionRange && turretMode == true)
+        {
+            currentState = Calabaza.Shooting;
+            playerDetected = true;
+        }
+
     }
 
     private void ChasePlayer()
