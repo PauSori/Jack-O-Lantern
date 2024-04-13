@@ -26,6 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7329485562326560827}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0000001, y: 1.0000005, z: 1.0000005}
@@ -33,7 +34,6 @@ Transform:
   m_Children:
   - {fileID: 6030462947286797226}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &7229221336603594525
 SphereCollider:
@@ -43,9 +43,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7329485562326560827}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 0.7
   m_Center: {x: -5.407017e-11, y: -0.005679996, z: -0.013287001}
 --- !u!114 &7215992374687047675
@@ -68,6 +76,13 @@ MonoBehaviour:
     m_AudioClips: []
   m_PickupMessageText: Picked up Bow and Arrow
   m_PickupMessageIcon: {fileID: 0}
+  m_OnSelect:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeselect:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DestroyDelay: 0
   m_AlwaysPickup: 0
   m_Equip: 1
   m_ItemSetGroup: -1
@@ -100,12 +115,13 @@ MonoBehaviour:
   m_Damping: 0.1
   m_RotationDamping: 0.1
   m_RotateInMoveDirection: 0
-  m_SettleThreshold: 0
+  m_SettlePositionThreshold: 0.01
+  m_SettleRotationThreshold: 0.01
   m_SidewaysSettleThreshold: 0.75
   m_StartSidewaysVelocityMagnitude: 3
   m_ImpactLayers:
     serializedVersion: 2
-    m_Bits: 2415919083
+    m_Bits: 2348810987
   m_SurfaceImpact: {fileID: 0}
   m_ForceMultiplier: 40
   m_CollisionMode: 1
@@ -120,6 +136,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 7331044741600362629}
     m_Modifications:
     - target: {fileID: 4011943688872343953, guid: 02d0d1c3a8b6aa14fb868d20eb6e1e35,
@@ -188,6 +205,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02d0d1c3a8b6aa14fb868d20eb6e1e35, type: 3}
 --- !u!4 &6030462947286797226 stripped
 Transform:
