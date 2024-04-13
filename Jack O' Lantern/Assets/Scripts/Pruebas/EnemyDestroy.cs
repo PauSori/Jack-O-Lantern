@@ -16,7 +16,7 @@ public class EnemyDestroy : MonoBehaviour
         // ...
 
         // Si el enemigo debe ser destruido, llamar a DestroyEnemy()
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             OnDestroy();
         }

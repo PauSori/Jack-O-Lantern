@@ -17,6 +17,23 @@ MonoBehaviour:
   m_Capacity: 2147483647
   m_Prefabs:
   - {fileID: 3056352257377300348, guid: a0ab6d43c6d245e48a59d96efd7d2382, type: 3}
+--- !u!114 &-4068462069690389759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: myarrows
+  m_EditorClassIdentifier: 
+  m_ID: 8
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs:
+  - {fileID: 7771915061955658277, guid: 8a544b3eac3ed9e4484acefed629b466, type: 3}
 --- !u!114 &-2425753834364338727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +90,7 @@ MonoBehaviour:
   - {fileID: 4339429099134251468}
   - {fileID: 6969474177885602789}
   - {fileID: 2428810790971222875}
+  - {fileID: -4068462069690389759}
 --- !u!114 &2428810790971222875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +107,7 @@ MonoBehaviour:
   m_CategoryIDs: 66748e71
   m_Capacity: 2147483647
   m_Prefabs:
-  - {fileID: 1834043069192340, guid: 1d40600ec45bd7a41b839870735b23e5, type: 3}
+  - {fileID: 7988723432147299274, guid: f2af038d41131424691c43af805627b8, type: 3}
 --- !u!114 &3233532126975444581
 MonoBehaviour:
   m_ObjectHideFlags: 0
