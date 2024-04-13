@@ -10,6 +10,7 @@ public class CalabazaController : MonoBehaviour
     public float patrolSpeed = 2f; // Velocidad de patrulla
     public float chaseSpeed = 5f; // Velocidad de persecución
     public float detectionRange = 10f; // Rango de detección del jugador
+    public float detectionAngle = 60f; // Ángulo de visión del jugador (en grados)
     public GameObject bulletPrefab; // Prefab de la bala
     public Transform firePoint; // Punto de disparo
     public float fireRate = 1f;
@@ -66,14 +67,19 @@ public class CalabazaController : MonoBehaviour
         agent.speed = patrolSpeed;
         if (agent.remainingDistance < 0.5f)
             SetDestinationToNextPatrolPoint();
-
+        
+        
+        // Detectar al jugador dentro del cono de visión
+        Vector3 dirToPlayer = player.position - transform.position;
+        float angleToPlayer = Vector3.Angle(transform.forward, dirToPlayer);
         // Detect player
-        if (Vector3.Distance(transform.position, player.position) < detectionRange && turretMode == false)
+        if (angleToPlayer < detectionAngle / 2f && dirToPlayer.magnitude < detectionRange && turretMode == false)
         {
             currentState = Calabaza.Chasing;
             playerDetected = true;
         }
-        else if(Vector3.Distance(transform.position, player.position) < detectionRange && turretMode == true)
+
+        else if (angleToPlayer < detectionAngle / 2f && dirToPlayer.magnitude < detectionRange && turretMode == true)
         {
             currentState = Calabaza.Shooting;
             playerDetected = true;
@@ -148,9 +154,15 @@ public class CalabazaController : MonoBehaviour
         // Dibuja una esfera roja para el rango melee
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
-
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
+
+        Gizmos.color = Color.blue;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+        Gizmos.DrawFrustum(Vector3.zero, detectionAngle, detectionRange, 0f, 1f);
+
+
     }
 }
 

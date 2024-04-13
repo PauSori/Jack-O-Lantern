@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Compression;
 using UnityEngine;
 
 public class PuertaController : MonoBehaviour
@@ -95,5 +96,11 @@ public class PuertaController : MonoBehaviour
         shouldResetEnemies = false;
     }
     // Llama a la coroutine cuando sea necesario
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(spawnPoint.position, spawnRadius);
+    }
 
 }
