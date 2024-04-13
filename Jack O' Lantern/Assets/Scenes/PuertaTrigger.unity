@@ -3031,6 +3031,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monitors
       objectReference: {fileID: 0}
+    - target: {fileID: 114239403408650094, guid: b5bf2e4077598914b83fc5e4ca20f2f4,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224285287289726662, guid: b5bf2e4077598914b83fc5e4ca20f2f4,
         type: 3}
       propertyPath: m_AnchorMax.x
