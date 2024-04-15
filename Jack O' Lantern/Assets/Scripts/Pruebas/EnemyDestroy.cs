@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyDestroy : MonoBehaviour
 {
+    public GameObject parentObject;
 
     void Start()
     {
@@ -28,7 +29,8 @@ public class EnemyDestroy : MonoBehaviour
 
     void OnDestroy()
     {
-        PuertaController.instance.RemoveGameObject(gameObject);
+        PuertaController.instance.RemoveGameObject(parentObject);
+        Destroy(parentObject);
         Destroy(gameObject);
     }
 

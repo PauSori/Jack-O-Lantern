@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d6bc1ffc732bb4d9c0179b8d681951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentObject: {fileID: 1963654251145166574}
 --- !u!195 &4534009428187907896
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -152,6 +153,7 @@ MonoBehaviour:
   fireRate: 1
   attackRange: 2.42
   playerDetected: 0
+  parentObject: {fileID: 1963654251145166574}
   turretMode: 1
   slider: {fileID: 6050096456430035822}
 --- !u!136 &7275366881518960704
