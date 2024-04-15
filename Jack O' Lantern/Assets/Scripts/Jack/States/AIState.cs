@@ -60,7 +60,6 @@ public class Calabaza : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         attackCollider.enabled = false;
     }
-
     private void Update()
     {
         CheckStates();
