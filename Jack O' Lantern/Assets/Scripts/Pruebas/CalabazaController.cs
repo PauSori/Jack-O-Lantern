@@ -22,6 +22,7 @@ public class CalabazaController : MonoBehaviour
     public bool playerDetected = false;
     private float nextFireTime = 5f;
 
+    public GameObject parentObject;
     public bool turretMode = false;
 
     public Slider slider;
@@ -65,7 +66,7 @@ public class CalabazaController : MonoBehaviour
         if(slider.value <= 0)
         {
             Debug.Log("Muerto");
-            Destroy(gameObject);
+            OnDestroy();
         }
 
     }
@@ -168,6 +169,14 @@ public class CalabazaController : MonoBehaviour
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
+    void OnDestroy()
+    {
+        PuertaController.instance.RemoveGameObject(parentObject);
+        Destroy(parentObject);
+        Destroy(gameObject);
+
+    }
+
 
     void OnDrawGizmosSelected()
     {
