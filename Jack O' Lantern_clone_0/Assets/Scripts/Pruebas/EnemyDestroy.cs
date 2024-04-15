@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyDestroy : MonoBehaviour
 {
+    public GameObject parentObject;
 
     void Start()
     {
@@ -16,7 +17,7 @@ public class EnemyDestroy : MonoBehaviour
         // ...
 
         // Si el enemigo debe ser destruido, llamar a DestroyEnemy()
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             OnDestroy();
         }
@@ -28,7 +29,8 @@ public class EnemyDestroy : MonoBehaviour
 
     void OnDestroy()
     {
-        PuertaController.instance.RemoveGameObject(gameObject);
+        PuertaController.instance.RemoveGameObject(parentObject);
+        Destroy(parentObject);
         Destroy(gameObject);
     }
 

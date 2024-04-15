@@ -624,6 +624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e122039269a5446b502fa2fcb03d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vida: 5
+  nickname: Raiden
+  checkPoints: []
 --- !u!1 &830502811
 GameObject:
   m_ObjectHideFlags: 0

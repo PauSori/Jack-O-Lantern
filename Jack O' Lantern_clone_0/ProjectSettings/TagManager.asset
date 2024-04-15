@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Object
   - Objeto
+  - bullet
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Obstaculo
   - Arms y Head
   - 
-  - 
+  - Objeto
   - 
   - 
   - 
