@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Object
   - Objeto
+  - bullet
   layers:
   - Default
   - TransparentFX
