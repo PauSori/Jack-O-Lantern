@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class AIState : MonoBehaviour
+public class Calabaza : MonoBehaviour
 {
     #region Health Settings
     [Header("Health Settings")]

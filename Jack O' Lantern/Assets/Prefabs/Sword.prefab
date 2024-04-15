@@ -150,11 +150,11 @@ MonoBehaviour:
   m_SpawnParent:
     m_ID: -1
     m_Object: {fileID: 0}
-  m_LocalSpawnPosition: {x: 0, y: 0, z: 0}
-  m_LocalSpawnRotation: {x: 0, y: 0, z: 0}
+  m_LocalSpawnPosition: {x: 0.314, y: -0.286, z: 0.359}
+  m_LocalSpawnRotation: {x: -40.418, y: 4.326, z: -6.332}
   m_LocalSpawnScale: {x: 1, y: 1, z: 1}
   m_FirstPersonBaseObjectID: 0
-  m_VisibleItem: {fileID: 7632368054312514263}
+  m_VisibleItem: {fileID: 5250007573829895044}
   m_AdditionalControlObjects: []
   m_PositionSpring:
     m_Stiffness: 0.2
