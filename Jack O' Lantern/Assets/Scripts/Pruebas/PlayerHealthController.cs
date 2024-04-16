@@ -9,6 +9,7 @@ public class PlayerHealthController : MonoBehaviour
     public GameObject hitPlayerDamage;
     public GameObject gameOver;
     public GameObject curado;
+    //public bool flashHealth = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +25,9 @@ public class PlayerHealthController : MonoBehaviour
         {
             GameOver();
         }
-        if (curado == true)
+        if (curado.activeSelf)
         {
-            Invoke("curarse", 6.5f);
+            Invoke("curarse", 1.5f);
         }
     }
     public void curarse()
