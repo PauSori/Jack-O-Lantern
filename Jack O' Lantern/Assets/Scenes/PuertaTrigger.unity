@@ -6038,6 +6038,8 @@ GameObject:
   - component: {fileID: 927786971}
   - component: {fileID: 927786970}
   - component: {fileID: 927786969}
+  - component: {fileID: 927786981}
+  - component: {fileID: 927786980}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -6196,6 +6198,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &927786980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927786968}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e367e06a14606c843a429fc9a9cb424a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &927786981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927786968}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 6e298d65597ceb94f827050d51f2d4ba,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 927786980}
+        m_TargetAssemblyTypeName: InputSystemController, Assembly-CSharp
+        m_MethodName: HandAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cc36a001-f416-45c1-8e70-0222acec1ae0
+    m_ActionName: PlayerTierra/Atacar[/Mouse/leftButton]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerTierra
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!222 &929213688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11806,7 +11867,16 @@ MonoBehaviour:
   - ItemDefinition: {fileID: 6969474177885602789, guid: 1a382e0640df7bf4184f79e795a7f0cd,
       type: 2}
     Amount: 1
-  - ItemDefinition: {fileID: 2428810790971222875, guid: 1a382e0640df7bf4184f79e795a7f0cd,
+  - ItemDefinition: {fileID: 629613338445691874, guid: 1a382e0640df7bf4184f79e795a7f0cd,
+      type: 2}
+    Amount: 1
+  - ItemDefinition: {fileID: -4068462069690389759, guid: 1a382e0640df7bf4184f79e795a7f0cd,
+      type: 2}
+    Amount: 1
+  - ItemDefinition: {fileID: -8999094720709718379, guid: 1a382e0640df7bf4184f79e795a7f0cd,
+      type: 2}
+    Amount: 1
+  - ItemDefinition: {fileID: -1716537533568632583, guid: 1a382e0640df7bf4184f79e795a7f0cd,
       type: 2}
     Amount: 1
   m_RemoveExceptions: []

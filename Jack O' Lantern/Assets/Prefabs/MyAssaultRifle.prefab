@@ -1112,8 +1112,8 @@ MonoBehaviour:
   m_SpawnParent:
     m_ID: -1
     m_Object: {fileID: 0}
-  m_LocalSpawnPosition: {x: 0.2104, y: 0.0273, z: 0.5057}
-  m_LocalSpawnRotation: {x: 0, y: 0, z: 0}
+  m_LocalSpawnPosition: {x: -0.049, y: 0.314, z: 0.039}
+  m_LocalSpawnRotation: {x: -87.512, y: -12.392, z: 114.473}
   m_LocalSpawnScale: {x: 1, y: 1, z: 1}
   m_FirstPersonBaseObjectID: 0
   m_VisibleItem: {fileID: 6808621397957235516}
@@ -1390,7 +1390,8 @@ MonoBehaviour:
         m_Enabled: 1
         m_ID: -1
         m_Name: 
-        m_AmmoItemDefinition: {fileID: 0}
+        m_AmmoItemDefinition: {fileID: -1716537533568632583, guid: 1a382e0640df7bf4184f79e795a7f0cd,
+          type: 2}
         m_DropOption: 2
         m_SharedAmmoItemIdentifier: 0
     - rid: 5031304955241693189
