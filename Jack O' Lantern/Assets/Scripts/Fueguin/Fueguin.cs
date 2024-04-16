@@ -20,6 +20,7 @@ public class Fueguin : MonoBehaviour
     private Collider closestEnemy = null;
     private Collider closestObject;
     public GameObject Player; // NUEVO IMPLEMENTADO // Nueva variable para la distancia máxima
+    
 
 
 
@@ -33,34 +34,29 @@ public class Fueguin : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (CheckCombatState() == true)
+        if (CheckEnemy() == true) // Si detecta un enemigo, entra en modo de combate
         {
+            CheckCombat = true;
+
             if (CheckCD() == false)
             {
-                if (CheckEnemy() == true)
-                {
-                    Stun();
-                    FollowEnemy();
-                }
-                else
-                {
-                    FollowPlayer();
-                }
+                Stun();
+                FollowEnemy();
             }
+        }
+        else if (CheckObjectInArea() == true) // Si no hay enemigos, verifica si hay un objeto cerca
+        {
+            CheckCombat = false;
+            FollowObject();
         }
         else
         {
-            if (CheckObjectInArea() == true)
-            {
-                FollowObject();
-            }
-            else
-            {
-                Debug.Log("LLendo al player");
-                FollowPlayer();
-            }
+            CheckCombat = false;
+            Debug.Log("LLendo al player");
+            FollowPlayer();
         }
     }
+
 
 
     private void FollowObject()
@@ -75,6 +71,8 @@ public class Fueguin : MonoBehaviour
             FollowPlayer();
         }
     }
+
+    ////////////////// Hacer que a la que detecte el objeto no vaya y vuelva todo el rato
 
     private bool CheckEnemy()
     {
@@ -176,14 +174,7 @@ public class Fueguin : MonoBehaviour
         }
     }
 
-    public bool CheckCombatState()
-    {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            CheckCombat = !CheckCombat;
-        }
-        return CheckCombat;
-    }
+    
 
     private IEnumerator Cooldown()
     {
