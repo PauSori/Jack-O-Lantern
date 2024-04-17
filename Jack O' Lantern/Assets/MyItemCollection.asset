@@ -1,22 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8999094720709718379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
-  m_Name: MyAssaultRifle
-  m_EditorClassIdentifier: 
-  m_ID: 0
-  m_CategoryIDs: 66748e71
-  m_Capacity: 2147483647
-  m_Prefabs:
-  - {fileID: 3056352257377300348, guid: a0ab6d43c6d245e48a59d96efd7d2382, type: 3}
 --- !u!114 &-4068462069690389759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
   m_Name: myarrows
   m_EditorClassIdentifier: 
-  m_ID: 8
+  m_ID: 6
   m_CategoryIDs: 
   m_Capacity: 2147483647
   m_Prefabs:
@@ -46,29 +29,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
   m_Name: hammer
   m_EditorClassIdentifier: 
-  m_ID: 4
+  m_ID: 2
   m_CategoryIDs: 66748e71
   m_Capacity: 2147483647
   m_Prefabs:
   - {fileID: 8283673471715226650, guid: 4adf26fc60a122e45943a615ff5acef8, type: 3}
   - {fileID: 904303901495092779, guid: a50b0b1211ed34c4197dd60d94c58926, type: 3}
   - {fileID: 2973659140237089431, guid: 65cb2717a2178ee43b862ec9f94314b3, type: 3}
---- !u!114 &-1716537533568632583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
-  m_Name: MyAssaultRifleBullet
-  m_EditorClassIdentifier: 
-  m_ID: 1
-  m_CategoryIDs: 
-  m_Capacity: 2147483647
-  m_Prefabs: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,8 +51,6 @@ MonoBehaviour:
   m_Categories:
   - {fileID: 9028155499053686892}
   m_ItemTypes:
-  - {fileID: -8999094720709718379}
-  - {fileID: -1716537533568632583}
   - {fileID: 6979164572967840667}
   - {fileID: 3233532126975444581}
   - {fileID: -2425753834364338727}
@@ -94,6 +59,25 @@ MonoBehaviour:
   - {fileID: 2428810790971222875}
   - {fileID: -4068462069690389759}
   - {fileID: 629613338445691874}
+  - {fileID: 423965969063491565}
+  - {fileID: 2460239116352251250}
+--- !u!114 &423965969063491565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: MyAssaultRifle
+  m_EditorClassIdentifier: 
+  m_ID: 8
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs:
+  - {fileID: 1181443628090419428, guid: a0ab6d43c6d245e48a59d96efd7d2382, type: 3}
 --- !u!114 &629613338445691874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
   m_Name: bowWeapon
   m_EditorClassIdentifier: 
-  m_ID: 9
+  m_ID: 7
   m_CategoryIDs: 66748e71
   m_Capacity: 2147483647
   m_Prefabs:
@@ -123,11 +107,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
   m_Name: mybow
   m_EditorClassIdentifier: 
-  m_ID: 7
+  m_ID: 5
   m_CategoryIDs: 66748e71
   m_Capacity: 2147483647
   m_Prefabs:
   - {fileID: 7988723432147299274, guid: f2af038d41131424691c43af805627b8, type: 3}
+--- !u!114 &2460239116352251250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: MyBullet
+  m_EditorClassIdentifier: 
+  m_ID: 9
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs: []
 --- !u!114 &3233532126975444581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
   m_Name: otherSword
   m_EditorClassIdentifier: 
-  m_ID: 3
+  m_ID: 1
   m_CategoryIDs: 66748e71
   m_Capacity: 2147483647
   m_Prefabs:
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
   m_Name: hacha
   m_EditorClassIdentifier: 
-  m_ID: 5
+  m_ID: 3
   m_CategoryIDs: 66748e71
   m_Capacity: 2147483647
   m_Prefabs:
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
   m_Name: cetro
   m_EditorClassIdentifier: 
-  m_ID: 6
+  m_ID: 4
   m_CategoryIDs: 66748e71
   m_Capacity: 2147483647
   m_Prefabs:
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
   m_Name: mysword
   m_EditorClassIdentifier: 
-  m_ID: 2
+  m_ID: 0
   m_CategoryIDs: 66748e71
   m_Capacity: 2147483647
   m_Prefabs:
