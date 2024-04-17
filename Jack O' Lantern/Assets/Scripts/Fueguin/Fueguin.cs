@@ -20,21 +20,22 @@ public class Fueguin : MonoBehaviour
     private Collider closestEnemy = null;
     private Collider closestObject;
     public GameObject Player; // NUEVO IMPLEMENTADO // Nueva variable para la distancia máxima
-    
-
 
 
     void Update()
     {
         CheckStates();
-
     }
 
     void CheckStates()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (CheckEnemy() == true) // Si detecta un enemigo, entra en modo de combate
+        if (distanceToPlayer > maxDistanceFromPlayer)
+        {
+            FollowPlayer();
+        }
+        else if (CheckEnemy() == true) // Si detecta un enemigo, entra en modo de combate
         {
             CheckCombat = true;
 
@@ -52,22 +53,7 @@ public class Fueguin : MonoBehaviour
         else
         {
             CheckCombat = false;
-            Debug.Log("LLendo al player");
-            FollowPlayer();
-        }
-    }
-
-
-
-    private void FollowObject()
-    {
-        if (closestObject != null)
-        {
-            Vector3 newPos = closestObject.transform.position + offset;
-            transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
-        }
-        else
-        {
+            //Debug.Log("LLendo al player");
             FollowPlayer();
         }
     }
@@ -99,32 +85,6 @@ public class Fueguin : MonoBehaviour
         }
     }
 
-    private bool CheckCD()
-    {
-        return isCooldown;
-    }
-
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Objeto"))
-    //    {
-    //        Debug.Log("Objeto detectado!");
-    //        objectInArea = true;
-    //        closestObject = other; // Asigna el objeto más cercano
-    //        FollowObject(); // Mueve tu objeto hacia el objeto detectado
-    //    }
-    //}
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Objeto"))
-    //    {
-    //        closestObject = null; // Resetea el objeto más cercano cuando sale del radio
-    //        objectInArea = false;
-    //    }
-    //}
-
-
     private bool CheckObjectInArea()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -139,7 +99,7 @@ public class Fueguin : MonoBehaviour
             foreach (Collider obj in objects)
             {
                 float distanceSqr = (obj.transform.position - transform.position).sqrMagnitude;
-                if (distanceSqr < closestDistanceSqr)
+                if (distanceSqr < closestDistanceSqr);
                 {
                     closestDistanceSqr = distanceSqr;
                     closestObject = obj;
@@ -150,8 +110,22 @@ public class Fueguin : MonoBehaviour
         else
         {
             Debug.Log("Sin objeto");
+
             objectInArea = false;
             return false;
+        }
+    }
+
+    private void FollowObject()
+    {
+        if (closestObject != null)
+        {
+            Vector3 newPos = closestObject.transform.position + offset;
+            transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
+        }
+        else
+        {
+            FollowPlayer();
         }
     }
 
@@ -174,15 +148,6 @@ public class Fueguin : MonoBehaviour
         }
     }
 
-    
-
-    private IEnumerator Cooldown()
-    {
-        isCooldown = true;
-        yield return new WaitForSeconds(5);
-        isCooldown = false;
-    }
-
     private void Stun()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -191,9 +156,24 @@ public class Fueguin : MonoBehaviour
             FollowPlayer(); // Agrega esta línea
         }
     }
+
+
+    private bool CheckCD()
+    {
+        return isCooldown;
+    }
+
+    private IEnumerator Cooldown()
+    {
+        isCooldown = true;
+        yield return new WaitForSeconds(5);
+        isCooldown = false;
+    }
+
+    
+    //Areas
     void OnDrawGizmosSelected()
     {
-        // Dibuja una esfera roja para el rango melee
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
