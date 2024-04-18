@@ -23907,6 +23907,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2549227111664160028, guid: bb26f514254ad4042aab834094a61f5d,
         type: 3}
+      propertyPath: turretMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549227111664160028, guid: bb26f514254ad4042aab834094a61f5d,
+        type: 3}
+      propertyPath: attackMelee
+      value: 
+      objectReference: {fileID: 7035882125870191205, guid: 3978134e3d9ae684985a5fcdd87152ed,
+        type: 3}
+    - target: {fileID: 2549227111664160028, guid: bb26f514254ad4042aab834094a61f5d,
+        type: 3}
       propertyPath: parentObject
       value: 
       objectReference: {fileID: 625897131}

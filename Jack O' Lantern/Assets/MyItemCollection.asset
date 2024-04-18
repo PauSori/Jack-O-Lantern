@@ -128,7 +128,7 @@ MonoBehaviour:
   m_CategoryIDs: 66748e71
   m_Capacity: 2147483647
   m_Prefabs:
-  - {fileID: 7988723432147299274, guid: f2af038d41131424691c43af805627b8, type: 3}
+  - {fileID: 1834043069192340, guid: 1d40600ec45bd7a41b839870735b23e5, type: 3}
 --- !u!114 &2460239116352251250
 MonoBehaviour:
   m_ObjectHideFlags: 0
