@@ -12281,7 +12281,7 @@ MonoBehaviour:
   m_OnDeathEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ApplyFallDamage: 1
+  m_ApplyFallDamage: 0
   m_MinFallDamageHeight: 3
   m_MinFallDamage: 1
   m_MaxFallDamage: 50
@@ -12690,7 +12690,7 @@ MonoBehaviour:
           m_Preset: {fileID: 0}
           m_BlockList: []
           m_Default: 1
-        m_Enabled: 1
+        m_Enabled: 0
         m_StartType: 2
         m_StopType: 0
         m_InputNames:
