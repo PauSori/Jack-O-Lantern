@@ -389,7 +389,7 @@ MonoBehaviour:
   objectInArea: 0
   detectionRadius: 8
   detectionObjectRadius: 11.7
-  maxDistanceFromPlayer: 19.2
+  maxDistanceFromPlayer: 19
   Enemy:
     serializedVersion: 2
     m_Bits: 67108864

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Fueguin : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class Fueguin : MonoBehaviour
 
         if (distanceToPlayer > maxDistanceFromPlayer)
         {
+
             FollowPlayer();
         }
         else if (CheckEnemy() == true) // Si detecta un enemigo, entra en modo de combate
@@ -90,16 +92,17 @@ public class Fueguin : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         Collider[] objects = Physics.OverlapSphere(transform.position, detectionObjectRadius, Objeto);
-
+       
         if (objects.Length > 0 && distanceToPlayer < maxDistanceFromPlayer)
         {
             Debug.Log("Objeto encontrado");
+            Debug.Log("Distancetoplayer:" + distanceToPlayer);
             objectInArea = true;
             float closestDistanceSqr = Mathf.Infinity;
             foreach (Collider obj in objects)
             {
                 float distanceSqr = (obj.transform.position - transform.position).sqrMagnitude;
-                if (distanceSqr < closestDistanceSqr);
+                if (distanceSqr < closestDistanceSqr)
                 {
                     closestDistanceSqr = distanceSqr;
                     closestObject = obj;
@@ -115,7 +118,7 @@ public class Fueguin : MonoBehaviour
             return false;
         }
     }
-
+    
     private void FollowObject()
     {
         if (closestObject != null)
@@ -131,6 +134,7 @@ public class Fueguin : MonoBehaviour
 
     private void FollowPlayer()
     {
+        Debug.Log("dins follow player");
         Vector3 newPos = player.position + offset;
         transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
     }
