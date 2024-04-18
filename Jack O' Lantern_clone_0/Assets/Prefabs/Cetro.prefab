@@ -289,13 +289,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4185537058841199137}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.0036, y: 0.2625, z: -0.0786}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8735520735259199203}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &5424954537926657405
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
     type: 3}
   m_FullInventoryDrop: 0
   m_EquipEvent:
-    m_WaitForAnimationEvent: 0
+    m_WaitForAnimationEvent: 1
     m_Duration: 0
     m_WaitForSlotEvent: 0
   m_EquipCompleteEvent:
@@ -627,7 +627,7 @@ MonoBehaviour:
   m_ForceRootMotionRotation: 0
   m_TriggerActionModuleGroup:
     m_Modules:
-    - rid: 707337210847559716
+    - rid: 5031305112958271496
   m_UsableActionModuleGroup:
     m_Modules: []
   m_ShooterModuleGroup:
@@ -674,77 +674,6 @@ MonoBehaviour:
         m_Bindings:
           m_Bindings: []
         m_Enabled: 1
-    - rid: 707337210847559716
-      type: {class: Charged, ns: Opsive.UltimateCharacterController.Items.Actions.Modules,
-        asm: Opsive.UltimateCharacterController}
-      data:
-        m_States:
-        - m_Name: Default
-          m_Preset: {fileID: 0}
-          m_BlockList: []
-          m_Default: 1
-        m_Bindings:
-          m_Bindings: []
-        m_Enabled: 1
-        m_ID: 0
-        m_Name: 
-        m_PlayAudioOnStartUse: 0
-        m_SubstateIndexData:
-          m_Additive: 0
-          m_Index: 0
-          m_Priority: 100
-        m_UseAnimatorAudioStateSet:
-          m_AnimatorAudioStateSelector:
-            rid: 707337210847559717
-          m_States:
-          - m_States:
-            - m_Name: Default
-              m_Preset: {fileID: 0}
-              m_BlockList: []
-              m_Default: 1
-            m_Enabled: 1
-            m_AllowDuringMovement: 1
-            m_RequireGrounded: 0
-            m_StateName: 
-            m_ItemSubstateIndex: 2
-            m_AudioClipSet:
-              m_AudioConfig: {fileID: 0}
-              m_AudioClips: []
-        m_ChargeAudioClipSet:
-          m_AudioConfig: {fileID: 11400000, guid: 1b0c74ef375fe7a41bdbf6da5895d475,
-            type: 2}
-          m_AudioClips: []
-        m_MinChargeForce: 0.1
-        m_MaxChargeForce: 1
-        m_ChargeTimeForceNormalizer: 1
-        m_ChargeSubstateParameterValue:
-          m_Additive: 0
-          m_Index: 0
-          m_Priority: 100
-        m_MinChargeCompleteEvent:
-          m_WaitForAnimationEvent: 1
-          m_Duration: 0.2
-          m_WaitForSlotEvent: 0
-        m_MaxChargeCompleteEvent:
-          m_WaitForAnimationEvent: 1
-          m_Duration: 0.2
-          m_WaitForSlotEvent: 0
-        m_DepleteChargeSubstateParameterValue:
-          m_Additive: 0
-          m_Index: 0
-          m_Priority: 100
-        m_DepleteChargeCompleteEvent:
-          m_WaitForAnimationEvent: 1
-          m_Duration: 0.2
-          m_WaitForSlotEvent: 0
-        m_AutoFireOnFullCharge: 0
-        m_RepeatFire: 0
-        m_DepleteChargeOnStopEarly: 1
-    - rid: 707337210847559717
-      type: {class: Sequence, ns: Opsive.UltimateCharacterController.Items.AnimatorAudioStates,
-        asm: Opsive.UltimateCharacterController}
-      data:
-        m_ResetDelay: -1
     - rid: 1151095891258769431
       type: {class: GenericReloader, ns: Opsive.UltimateCharacterController.Items.Actions.Modules.Shootable,
         asm: Opsive.UltimateCharacterController}
@@ -866,7 +795,7 @@ MonoBehaviour:
         m_Enabled: 1
         m_ID: 0
         m_Name: 
-        m_ClipSize: 1
+        m_ClipSize: 50
     - rid: 4821689494049128455
       type: {class: SpawnProjectile, ns: Opsive.UltimateCharacterController.Items.Actions.Modules.Shootable,
         asm: Opsive.UltimateCharacterController}
@@ -891,7 +820,7 @@ MonoBehaviour:
         m_ReloadProjectileAttachment:
           m_FirstPerson:
             m_ID: 50004101
-            m_Object: {fileID: 0}
+            m_Object: {fileID: 4688098707331844608}
           m_ThirdPerson:
             m_ID: 50004101
             m_Object: {fileID: 0}
@@ -1048,6 +977,76 @@ MonoBehaviour:
         m_Priority: 0
         m_ShowLoaded: 1
         m_ShowUnloaded: 1
+    - rid: 5031305112958271496
+      type: {class: Charged, ns: Opsive.UltimateCharacterController.Items.Actions.Modules,
+        asm: Opsive.UltimateCharacterController}
+      data:
+        m_States:
+        - m_Name: Default
+          m_Preset: {fileID: 0}
+          m_BlockList: []
+          m_Default: 1
+        m_Bindings:
+          m_Bindings: []
+        m_Enabled: 1
+        m_ID: 0
+        m_Name: 
+        m_PlayAudioOnStartUse: 0
+        m_SubstateIndexData:
+          m_Additive: 0
+          m_Index: 0
+          m_Priority: 100
+        m_UseAnimatorAudioStateSet:
+          m_AnimatorAudioStateSelector:
+            rid: 5031305112958271497
+          m_States:
+          - m_States:
+            - m_Name: Default
+              m_Preset: {fileID: 0}
+              m_BlockList: []
+              m_Default: 1
+            m_Enabled: 1
+            m_AllowDuringMovement: 1
+            m_RequireGrounded: 0
+            m_StateName: 
+            m_ItemSubstateIndex: 2
+            m_AudioClipSet:
+              m_AudioConfig: {fileID: 0}
+              m_AudioClips: []
+        m_ChargeAudioClipSet:
+          m_AudioConfig: {fileID: 0}
+          m_AudioClips: []
+        m_MinChargeForce: 0.1
+        m_MaxChargeForce: 1
+        m_ChargeTimeForceNormalizer: 1
+        m_ChargeSubstateParameterValue:
+          m_Additive: 0
+          m_Index: 0
+          m_Priority: 100
+        m_MinChargeCompleteEvent:
+          m_WaitForAnimationEvent: 1
+          m_Duration: 0.2
+          m_WaitForSlotEvent: 0
+        m_MaxChargeCompleteEvent:
+          m_WaitForAnimationEvent: 1
+          m_Duration: 0.2
+          m_WaitForSlotEvent: 0
+        m_DepleteChargeSubstateParameterValue:
+          m_Additive: 0
+          m_Index: 0
+          m_Priority: 100
+        m_DepleteChargeCompleteEvent:
+          m_WaitForAnimationEvent: 1
+          m_Duration: 0.2
+          m_WaitForSlotEvent: 0
+        m_AutoFireOnFullCharge: 0
+        m_RepeatFire: 0
+        m_DepleteChargeOnStopEarly: 1
+    - rid: 5031305112958271497
+      type: {class: Sequence, ns: Opsive.UltimateCharacterController.Items.AnimatorAudioStates,
+        asm: Opsive.UltimateCharacterController}
+      data:
+        m_ResetDelay: -1
     - rid: 5031970203183611904
       type: {class: PlayAudioClip, ns: Opsive.UltimateCharacterController.Items.Actions.Impact,
         asm: Opsive.UltimateCharacterController}
@@ -1138,10 +1137,10 @@ MonoBehaviour:
         m_FirePointLocation:
           m_FirstPerson:
             m_ID: 50004101
-            m_Object: {fileID: 0}
+            m_Object: {fileID: 4688098707331844608}
           m_ThirdPerson:
             m_ID: 50004101
-            m_Object: {fileID: 0}
+            m_Object: {fileID: 5398239083567149510}
         m_Spread: 0.01
         m_ImpactLayers:
           serializedVersion: 2
@@ -1172,7 +1171,7 @@ Transform:
   m_GameObject: {fileID: 6096881771577132769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.269, z: 0.033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

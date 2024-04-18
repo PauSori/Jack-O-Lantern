@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Calabaza : MonoBehaviour
+public class AIState : MonoBehaviour
 {
     #region Health Settings
     [Header("Health Settings")]
@@ -25,23 +25,25 @@ public class Calabaza : MonoBehaviour
     private Transform playerTransform;
     #endregion
 
-    #region
+    #region BossChase
     [Header("BossChase")]
+    public float speed = 2f;
+    public float zigzagSpeed = 2f;
+    public float zigzagDistance = 2f;
     public Transform player;
-    public float speed = 5.0f;
-    private Vector3 direction;
-    private float chaosFactor = 2f;
+    private Vector3 startPosition;
     #endregion
 
     #region MeleeAttack
     [Header("MeleeAttack")]
     public Collider attackCollider;
+    public float jumpDistance = 10f;
     #endregion
 
     #region InvokeEnemy Settings
     [Header("InvokeSettings")]
     public GameObject enemyPrefab;
-    private System.Random random = new System.Random();
+    public List<GameObject> calabazas = new List<GameObject>();
     #endregion
 
     #region Tombs Settings
@@ -50,6 +52,8 @@ public class Calabaza : MonoBehaviour
     private bool isTeleporting = false;  // Nueva variable
     #endregion
 
+    public Animator anim;
+
     //COSAS QUE FALTAN
     //ATAQUE
     //SALTO HACIA ATRAS
@@ -57,13 +61,16 @@ public class Calabaza : MonoBehaviour
     public void Start()
     {
         currentHP = maxHP;
+        startPosition = transform.position;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        anim = GetComponent<Animator>();
         attackCollider.enabled = false;
     }
     private void Update()
     {
         CheckStates();
-
+        CheckForRanges();
+        LookAt();
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentHP -= 10;
@@ -76,181 +83,146 @@ public class Calabaza : MonoBehaviour
 
     public void CheckStates()
     {
-        //HALF-LIFE
-        if (currentHP <= maxHP / 2)
+        //MI PERSONAJE ESTA A MITAD DE VIDA
+        if(IsHalfLife(currentHP, maxHP))
         {
-            //SI HAY TUMBAS INICIA EL TP
-            if (CheckForTombs() == true) 
+            //COMPROBAR SI HAY TUMBAS
+            if (!CheckForTombs())
             {
-                TeleportToTomb();
-            }
-            //SI NO HAY TUMBAS EMPIEZA LA FASE
-            else
-            {
-                //SI ESTOY EN RANGO DE INVOCACIÓN
                 if (isInLongRange)
                 {
-                    //REVISA SI HAY UN MAX DE CALABAZAS
                     if (CheckForMaxPumpkins())
                     {
-                        //REVISA SI ESTOY EN RANGO DE ATAQUE
                         if (isInMeleeRange)
                         {
-                            //SI ESTOY EN RANGO DE ATAQUE Y ME BAJA LA VIDA HAZ UN DASH
-                            if (CheckHealthDrop() == true)
-                            {
-                                Dash();
-                            }
-                            //SI ESTOY EN RANGO Y NO ME BAJA LA VIDA ATACA Y HAZ DASH
-                            else
-                            {
                                 MeleeAttack();
                                 Dash();
-                            }
                         }
-                        //SINO ESTOY EN RANGO DE ATAQUE PERSIGUE
                         else
                         {
                             Chase();
                         }
                     }
-                    //SI NO HAY UN MAX DE CALABAZAS INVOCA
                     else
                     {
                         InvokeEnemies();
                     }
                 }
-                //SI NO ESTOY EN RANGO DE INVOCACIÓN REVISA SI ESTOY EN RANGO DE ATAQUE
                 else
                 {
-                    //REVISA SI ESTOY EN RANGO DE ATAQUE 
                     if (isInMeleeRange)
                     {
-                        //SI ESTOY EN RANGO DE ATAQUE Y RECIBO DAÑO DASHEA
-                        if (CheckHealthDrop() == true)
-                        {
-                            Dash();
-                        }
-                        //SI NO RECIBO DAÑO HAZ EL ATAQUE Y DASHEA
-                        else
-                        {
                             MeleeAttack();
                             Dash();
-                        }
+                        
                     }
-                    //SINO ESTOY EN RANGO DE ATAQUE  PERSIGUE
-                    else
+                    else 
                     {
                         Chase();
                     }
                 }
             }
+            else
+            {
+                TeleportToTomb();
+            }
         }
-        //FULL-LIFE
+        //ESTOY A FULL VIDA
         else
         {
-            if (isInMidRange)
+            if (isInLongRange)
             {
-                if (isInMeleeRange)
+                if(CheckForMaxPumpkins() )
                 {
-                    if (CheckHealthDrop())
+                    if (isInMeleeRange)
                     {
-                        Dash();
+                            MeleeAttack();
                     }
-                    else
+                    else if(isInMidRange)
                     {
-                        MeleeAttack();
-                        Dash();
+                        Chase();
                     }
                 }
-                else
+                else 
                 {
-                    Chase();
+                    InvokeEnemies();
                 }
             }
             else
             {
-                if (CheckForMaxPumpkins())
+                if (isInMeleeRange)
                 {
-                    if (isInMeleeRange)
-                    {
-                        if (CheckHealthDrop())
-                        {
-                            Dash();
-                        }
-                        else
-                        {
-                          MeleeAttack();
-                          Dash(); 
-                        }
-                    }
+                  MeleeAttack();
+                  Dash();
                 }
-                else
+                else if (isInMidRange)
                 {
-                    InvokeEnemies();
+                    Chase();
                 }
             }
         }
     }
     private void Dash()
     {
-        throw new NotImplementedException();
+        Debug.Log("DASH");
+    }
+
+    public bool IsHalfLife(float vidaActual, float vidaTotal)
+    {
+        if (vidaActual <= vidaTotal / 2)
+        {
+            return true; // El personaje está a mitad de vida o menos
+        }
+        else
+        {
+            return false; // El personaje tiene más de la mitad de vida
+        }
     }
 
     private void MeleeAttack()
     {
-
+        Debug.Log("ATAQUE A MELEE");
     }
 
     private bool CheckForMaxPumpkins()
     {
-        var enemies = GameObject.FindGameObjectsWithTag("JackPumpkin");
+        int cantidadDeCalabazas = calabazas.Count;
 
-        // Si hay 6 o más enemigos, devuelve true
-        if (enemies.Length >= 6)
+        if (cantidadDeCalabazas >= 5 && cantidadDeCalabazas <= 6)
         {
+            Debug.Log("A tope de calabazas");
             return true;
         }
-        // Si no hay enemigos, devuelve false
-        else if (enemies.Length == 0)
-        {
-            return false;
-        }
-        // En cualquier otro caso, puedes decidir qué hacer
         else
         {
-            return false; // o true, dependiendo de lo que quieras
+            if (cantidadDeCalabazas < 5)
+            {
+                Debug.Log("Puedo invocar");
+            }
+            return false;
         }
     }
-
-
-    IEnumerator InvokeEnemies()
+    public void  InvokeEnemies()
     {
-        // Espera 3 segundos
-        yield return new WaitForSeconds(3);
-
-        // Invoca entre 2 y 3 enemigos
-        int numEnemies = random.Next(2, 4);
-        for (int i = 0; i < numEnemies; i++)
-        {
-            Instantiate(enemyPrefab, transform.position + Vector3.up * (i + 1), Quaternion.identity);
-        }
+        Debug.Log("INVOCANDO");
     }
-
     void Chase()
     {
-        direction = (player.position - transform.position).normalized;
+        Vector3 direction = player.position - transform.position;
+        float zigzag = Mathf.Sin(Time.time * zigzagSpeed) * zigzagDistance;
 
-       
-        direction += new Vector3(Mathf.Sin(Time.time * chaosFactor), 0, Mathf.Cos(Time.time * chaosFactor));
+        transform.position += (direction.normalized + new Vector3(zigzag, 0, 0)) * speed * Time.deltaTime;
 
-        
-        direction = direction.normalized;
-
-        
-        transform.position += direction * speed * Time.deltaTime;
-
+        anim.SetFloat("Zigzag", zigzag / zigzagDistance);
     }
+
+    public void LookAt()
+    {
+        // Hacer que el enemigo siempre mire al jugador, pero solo en la dirección horizontal
+        Vector3 playerPositionSameLevel = new Vector3(player.position.x, transform.position.y, player.position.z);
+        transform.LookAt(playerPositionSameLevel);
+    }
+
     public void CheckForRanges()
     {
         distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
@@ -271,11 +243,11 @@ public class Calabaza : MonoBehaviour
         {
             isInLongRange = true;
         }
-        
     }
+
     bool CheckHealthDrop()
     {
-        if (previousHP - currentHP >= 30) 
+        if (previousHP - currentHP >= 10) 
         {
             Debug.Log("El personaje ha perdido 30 o más puntos de vida");
             return true;
@@ -285,36 +257,17 @@ public class Calabaza : MonoBehaviour
             return false;
         }
     }
-    void UpdateTombs()
+
+    public void TeleportToTomb()
     {
-        
-        tombs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Tomb"));
-    }
-
-    public IEnumerator TeleportToTomb()
-    {
-        isTeleporting = true;  
-
-        int randomTombIndex = UnityEngine.Random.Range(0, tombs.Count);
-
-        
-        Vector3 tombPosition = tombs[randomTombIndex].transform.position;
-
-         transform.position = new Vector3(tombPosition.x, transform.position.y, tombPosition.z);
-
-        yield return new WaitForSeconds(3);
-
-        UpdateTombs();
-
-        isTeleporting = false;  
+        Debug.Log("TP A TUMBAS");
     }
 
     public bool CheckForTombs()
     {
-        UpdateTombs();
-
-        if (tombs.Count > 0 && !isTeleporting)  {
-            StartCoroutine(TeleportToTomb());
+        if (GameManager.instance.tombs.Count > 0 && !isTeleporting)
+        {
+            TeleportToTomb();
             return true;
         }
         else

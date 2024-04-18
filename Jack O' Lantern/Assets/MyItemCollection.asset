@@ -15,8 +15,7 @@ MonoBehaviour:
   m_ID: 6
   m_CategoryIDs: 
   m_Capacity: 2147483647
-  m_Prefabs:
-  - {fileID: 0}
+  m_Prefabs: []
 --- !u!114 &-2425753834364338727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +60,7 @@ MonoBehaviour:
   - {fileID: 629613338445691874}
   - {fileID: 423965969063491565}
   - {fileID: 2460239116352251250}
+  - {fileID: 1457480393048460525}
 --- !u!114 &423965969063491565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +95,23 @@ MonoBehaviour:
   m_Capacity: 2147483647
   m_Prefabs:
   - {fileID: 1834043069192340, guid: 1d40600ec45bd7a41b839870735b23e5, type: 3}
+--- !u!114 &1457480393048460525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e74c32144565264eb86dc7514aca7f7, type: 3}
+  m_Name: cetro2
+  m_EditorClassIdentifier: 
+  m_ID: 10
+  m_CategoryIDs: 66748e71
+  m_Capacity: 2147483647
+  m_Prefabs:
+  - {fileID: 6938662025218444104, guid: 6e089c067c1a5e1448fe66b12e26c8ee, type: 3}
 --- !u!114 &2428810790971222875
 MonoBehaviour:
   m_ObjectHideFlags: 0

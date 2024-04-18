@@ -22,59 +22,43 @@ public class Fueguin : MonoBehaviour
     public GameObject Player; // NUEVO IMPLEMENTADO // Nueva variable para la distancia máxima
 
 
-
     void Update()
     {
         CheckStates();
-
     }
 
     void CheckStates()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (CheckCombatState() == true)
-        {
-            if (CheckCD() == false)
-            {
-                if (CheckEnemy() == true)
-                {
-                    Stun();
-                    FollowEnemy();
-                }
-                else
-                {
-                    FollowPlayer();
-                }
-            }
-        }
-        else
-        {
-            if (CheckObjectInArea() == true)
-            {
-                FollowObject();
-            }
-            else
-            {
-                Debug.Log("LLendo al player");
-                FollowPlayer();
-            }
-        }
-    }
-
-
-    private void FollowObject()
-    {
-        if (closestObject != null)
-        {
-            Vector3 newPos = closestObject.transform.position + offset;
-            transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
-        }
-        else
+        if (distanceToPlayer > maxDistanceFromPlayer)
         {
             FollowPlayer();
         }
+        else if (CheckEnemy() == true) // Si detecta un enemigo, entra en modo de combate
+        {
+            CheckCombat = true;
+
+            if (CheckCD() == false)
+            {
+                Stun();
+                FollowEnemy();
+            }
+        }
+        else if (CheckObjectInArea() == true) // Si no hay enemigos, verifica si hay un objeto cerca
+        {
+            CheckCombat = false;
+            FollowObject();
+        }
+        else
+        {
+            CheckCombat = false;
+            //Debug.Log("LLendo al player");
+            FollowPlayer();
+        }
     }
+
+    ////////////////// Hacer que a la que detecte el objeto no vaya y vuelva todo el rato
 
     private bool CheckEnemy()
     {
@@ -101,32 +85,6 @@ public class Fueguin : MonoBehaviour
         }
     }
 
-    private bool CheckCD()
-    {
-        return isCooldown;
-    }
-
-    //void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Objeto"))
-    //    {
-    //        Debug.Log("Objeto detectado!");
-    //        objectInArea = true;
-    //        closestObject = other; // Asigna el objeto más cercano
-    //        FollowObject(); // Mueve tu objeto hacia el objeto detectado
-    //    }
-    //}
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Objeto"))
-    //    {
-    //        closestObject = null; // Resetea el objeto más cercano cuando sale del radio
-    //        objectInArea = false;
-    //    }
-    //}
-
-
     private bool CheckObjectInArea()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -141,7 +99,7 @@ public class Fueguin : MonoBehaviour
             foreach (Collider obj in objects)
             {
                 float distanceSqr = (obj.transform.position - transform.position).sqrMagnitude;
-                if (distanceSqr < closestDistanceSqr)
+                if (distanceSqr < closestDistanceSqr);
                 {
                     closestDistanceSqr = distanceSqr;
                     closestObject = obj;
@@ -152,8 +110,22 @@ public class Fueguin : MonoBehaviour
         else
         {
             Debug.Log("Sin objeto");
+
             objectInArea = false;
             return false;
+        }
+    }
+
+    private void FollowObject()
+    {
+        if (closestObject != null)
+        {
+            Vector3 newPos = closestObject.transform.position + offset;
+            transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
+        }
+        else
+        {
+            FollowPlayer();
         }
     }
 
@@ -176,13 +148,19 @@ public class Fueguin : MonoBehaviour
         }
     }
 
-    public bool CheckCombatState()
+    private void Stun()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            CheckCombat = !CheckCombat;
+            StartCoroutine(Cooldown());
+            FollowPlayer(); // Agrega esta línea
         }
-        return CheckCombat;
+    }
+
+
+    private bool CheckCD()
+    {
+        return isCooldown;
     }
 
     private IEnumerator Cooldown()
@@ -192,17 +170,10 @@ public class Fueguin : MonoBehaviour
         isCooldown = false;
     }
 
-    private void Stun()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            StartCoroutine(Cooldown());
-            FollowPlayer(); // Agrega esta línea
-        }
-    }
+    
+    //Areas
     void OnDrawGizmosSelected()
     {
-        // Dibuja una esfera roja para el rango melee
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
