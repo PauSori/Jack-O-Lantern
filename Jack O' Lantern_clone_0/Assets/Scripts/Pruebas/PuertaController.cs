@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PuertaController : MonoBehaviour
 {
+    public GameObject ayudaPersona;
+
     private bool shouldResetEnemies = false;
 
     private bool cameraDisabled = false;
@@ -34,6 +36,7 @@ public class PuertaController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ayudaPersona.SetActive(false);
         capsuleCollider = GetComponent<CapsuleCollider>();
         Camera.gameObject.SetActive(false);
         animator = GetComponent<Animator>();
@@ -53,7 +56,10 @@ public class PuertaController : MonoBehaviour
         {
             ResetEnemies();
         }
-
+        if(ayudaPersona.activeSelf)
+        {
+            Invoke("disablePanel", 3.0f);
+        }
     }
     public void CameraOff()
     {
@@ -73,6 +79,7 @@ public class PuertaController : MonoBehaviour
         {
             shouldResetEnemies = true;
             capsuleCollider.enabled = false;
+            ayudaPersona.SetActive(true);
         }
     }
 
@@ -95,7 +102,10 @@ public class PuertaController : MonoBehaviour
 
         shouldResetEnemies = false;
     }
-    // Llama a la coroutine cuando sea necesario
+    public void disablePanel()
+    {
+        ayudaPersona.SetActive(false);
+    }
 
     private void OnDrawGizmos()
     {
