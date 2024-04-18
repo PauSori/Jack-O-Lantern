@@ -27,6 +27,7 @@ public class CalabazaController : MonoBehaviour
 
     public Slider slider;
 
+    public GameObject attackMelee;
 
     private enum Calabaza
     {
@@ -152,6 +153,14 @@ public class CalabazaController : MonoBehaviour
         dirToPlayer.y += 1.5f;
         // Rotar el objeto completo hacia esa dirección
         transform.rotation = Quaternion.LookRotation(dirToPlayer);
+        if (playerDetected && Time.time >= nextFireTime)
+        {
+            //agent.enabled = false;
+
+            Instantiate(attackMelee, firePoint.position, firePoint.rotation);
+            nextFireTime = Time.time + 1f / fireRate;
+        }
+
         if (Vector3.Distance(transform.position, player.position) > attackRange)
             currentState = Calabaza.Chasing;
     }
