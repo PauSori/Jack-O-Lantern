@@ -11,6 +11,7 @@ TagManager:
   - Objeto
   - bullet
   - JackPumpkin
+  - arrow
   layers:
   - Default
   - TransparentFX
