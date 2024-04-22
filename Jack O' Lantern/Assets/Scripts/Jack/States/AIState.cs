@@ -1,3 +1,4 @@
+using Opsive.UltimateCharacterController.Game;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,8 +43,14 @@ public class AIState : MonoBehaviour
 
     #region InvokeEnemy Settings
     [Header("InvokeSettings")]
+    public int maxEnemies = 10;
     public GameObject enemyPrefab;
-    public List<GameObject> calabazas = new List<GameObject>();
+
+    // Definir el punto de aparición
+    public Transform spawnPoint;
+
+    // Definir la etiqueta del enemigo
+    public string enemyTag = "JackPumpkin";
     #endregion
 
     #region Tombs Settings
@@ -91,32 +98,31 @@ public class AIState : MonoBehaviour
             {
                 if (isInLongRange)
                 {
-                    if (CheckForMaxPumpkins())
+                    if (!CheckForMaxPumpkins())
                     {
                         if (isInMeleeRange)
                         {
-                                MeleeAttack();
-                                Dash();
+                            MeleeAttack();
                         }
-                        else
+                        else if (isInMidRange)
                         {
                             Chase();
                         }
                     }
                     else
                     {
-                        InvokeEnemies();
+                            StartCoroutine(InvokeEnemies());
+                        
                     }
                 }
                 else
                 {
                     if (isInMeleeRange)
                     {
-                            MeleeAttack();
-                            Dash();
-                        
+                        MeleeAttack();
+                        Dash();
                     }
-                    else 
+                    else if (isInMidRange)
                     {
                         Chase();
                     }
@@ -132,7 +138,7 @@ public class AIState : MonoBehaviour
         {
             if (isInLongRange)
             {
-                if(CheckForMaxPumpkins() )
+                if(!CheckForMaxPumpkins())
                 {
                     if (isInMeleeRange)
                     {
@@ -145,7 +151,8 @@ public class AIState : MonoBehaviour
                 }
                 else 
                 {
-                    InvokeEnemies();
+                        StartCoroutine(InvokeEnemies());
+                    
                 }
             }
             else
@@ -186,25 +193,32 @@ public class AIState : MonoBehaviour
 
     private bool CheckForMaxPumpkins()
     {
-        int cantidadDeCalabazas = calabazas.Count;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
 
-        if (cantidadDeCalabazas >= 5 && cantidadDeCalabazas <= 6)
+        // Si el número de enemigos es menor que el máximo, devuelve false
+        if (enemies.Length < maxEnemies)
         {
-            Debug.Log("A tope de calabazas");
             return true;
         }
+        // Si no, devuelve true
         else
         {
-            if (cantidadDeCalabazas < 5)
-            {
-                Debug.Log("Puedo invocar");
-            }
             return false;
         }
     }
-    public void  InvokeEnemies()
+    IEnumerator InvokeEnemies()
     {
-        Debug.Log("INVOCANDO");
+        for (int i = 0; i < 2; i++)
+        {
+            // Invoca un enemigo
+            GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+
+            // Asegúrate de asignar la etiqueta al enemigo invocado
+            enemy.tag = enemyTag;
+
+            // Espera un segundo antes de volver a invocar
+            yield return new WaitForSeconds(1);
+        }
     }
     void Chase()
     {
@@ -242,19 +256,6 @@ public class AIState : MonoBehaviour
         else if (distanceToPlayer <= longRange)
         {
             isInLongRange = true;
-        }
-    }
-
-    bool CheckHealthDrop()
-    {
-        if (previousHP - currentHP >= 10) 
-        {
-            Debug.Log("El personaje ha perdido 30 o más puntos de vida");
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 

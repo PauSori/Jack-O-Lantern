@@ -12281,7 +12281,7 @@ MonoBehaviour:
   m_OnDeathEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ApplyFallDamage: 1
+  m_ApplyFallDamage: 0
   m_MinFallDamageHeight: 3
   m_MinFallDamage: 1
   m_MaxFallDamage: 50
@@ -12690,7 +12690,7 @@ MonoBehaviour:
           m_Preset: {fileID: 0}
           m_BlockList: []
           m_Default: 1
-        m_Enabled: 1
+        m_Enabled: 0
         m_StartType: 2
         m_StopType: 0
         m_InputNames:
@@ -23905,6 +23905,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: CALABAZA
       objectReference: {fileID: 0}
+    - target: {fileID: 2549227111664160028, guid: bb26f514254ad4042aab834094a61f5d,
+        type: 3}
+      propertyPath: turretMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549227111664160028, guid: bb26f514254ad4042aab834094a61f5d,
+        type: 3}
+      propertyPath: attackMelee
+      value: 
+      objectReference: {fileID: 7035882125870191205, guid: 3978134e3d9ae684985a5fcdd87152ed,
+        type: 3}
     - target: {fileID: 2549227111664160028, guid: bb26f514254ad4042aab834094a61f5d,
         type: 3}
       propertyPath: parentObject

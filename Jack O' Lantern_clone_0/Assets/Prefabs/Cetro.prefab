@@ -289,13 +289,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4185537058841199137}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.0036, y: 0.2625, z: -0.0786}
+  m_LocalRotation: {x: 0.0070416285, y: 0.9947058, z: 0.017249644, w: 0.101060614}
+  m_LocalPosition: {x: -0.0066, y: 0.2735, z: -0.0581}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8735520735259199203}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.885, y: 168.381, z: 1.003}
 --- !u!1 &5424954537926657405
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +795,7 @@ MonoBehaviour:
         m_Enabled: 1
         m_ID: 0
         m_Name: 
-        m_ClipSize: 50
+        m_ClipSize: 1
     - rid: 4821689494049128455
       type: {class: SpawnProjectile, ns: Opsive.UltimateCharacterController.Items.Actions.Modules.Shootable,
         asm: Opsive.UltimateCharacterController}
@@ -810,7 +810,7 @@ MonoBehaviour:
         m_Enabled: 1
         m_ID: -1
         m_Name: 
-        m_Projectile: {fileID: 7771915061955658277, guid: 8a544b3eac3ed9e4484acefed629b466,
+        m_Projectile: {fileID: 7771915061955658277, guid: 43a5cfaeb9803bc4084b6fe2f9dec227,
           type: 3}
         m_ProjectileStartLayer: 2
         m_ProjectileVisibility: 3
@@ -820,7 +820,8 @@ MonoBehaviour:
         m_ReloadProjectileAttachment:
           m_FirstPerson:
             m_ID: 50004101
-            m_Object: {fileID: 4688098707331844608}
+            m_Object: {fileID: 7769180514583067805, guid: 43a5cfaeb9803bc4084b6fe2f9dec227,
+              type: 3}
           m_ThirdPerson:
             m_ID: 50004101
             m_Object: {fileID: 0}
@@ -1014,7 +1015,8 @@ MonoBehaviour:
               m_AudioConfig: {fileID: 0}
               m_AudioClips: []
         m_ChargeAudioClipSet:
-          m_AudioConfig: {fileID: 0}
+          m_AudioConfig: {fileID: 11400000, guid: 61d14891b633d924d9bf777774fb3270,
+            type: 2}
           m_AudioClips: []
         m_MinChargeForce: 0.1
         m_MaxChargeForce: 1

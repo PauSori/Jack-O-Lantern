@@ -879,16 +879,18 @@ MonoBehaviour:
   player: {fileID: 1385189596}
   attackCollider: {fileID: 2011752810}
   jumpDistance: 10
-  enemyPrefab: {fileID: 1963654251145166574, guid: bb26f514254ad4042aab834094a61f5d,
+  maxEnemies: 10
+  enemyPrefab: {fileID: 3728283446871537989, guid: c4ea21c339bf16a40afd8e8c94101d54,
     type: 3}
-  calabazas: []
+  spawnPoint: {fileID: 1180149007}
+  enemyTag: JackPumpkin
   tombs:
   - {fileID: 100163409}
   - {fileID: 20682669}
   - {fileID: 47877898}
   - {fileID: 1212548061}
   - {fileID: 363454468}
-  anim: {fileID: 0}
+  anim: {fileID: 1072211431}
 --- !u!136 &1072211430
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -912,6 +914,12 @@ CapsuleCollider:
   m_Height: 1.9489615
   m_Direction: 1
   m_Center: {x: -0.028027771, y: 0.9883648, z: -2.2818025e-11}
+--- !u!95 &1072211431 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 628d9f896b56c8f47a49e2f64871a2e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1345561019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &1072211432
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1057,6 +1065,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1180149006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1180149007}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1180149007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180149006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.4065068, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1072211426}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1212548061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,7 +1217,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 628d9f896b56c8f47a49e2f64871a2e9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.40650678
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 628d9f896b56c8f47a49e2f64871a2e9,
         type: 3}
@@ -1230,9 +1269,18 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 85c9367be7f4de643976949c67aa81d2, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 628d9f896b56c8f47a49e2f64871a2e9,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 628d9f896b56c8f47a49e2f64871a2e9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1180149007}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 628d9f896b56c8f47a49e2f64871a2e9,
         type: 3}
