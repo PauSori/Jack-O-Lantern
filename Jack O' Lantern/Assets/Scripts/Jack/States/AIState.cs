@@ -45,6 +45,7 @@ public class AIState : MonoBehaviour
     [Header("InvokeSettings")]
     public int maxEnemies = 10;
     public GameObject enemyPrefab;
+    private bool isInvoking = false;
 
     // Definir el punto de aparición
     public Transform spawnPoint;
@@ -138,7 +139,7 @@ public class AIState : MonoBehaviour
         {
             if (isInLongRange)
             {
-                if(!CheckForMaxPumpkins())
+                if(CheckForMaxPumpkins())
                 {
                     if (isInMeleeRange)
                     {
@@ -151,8 +152,10 @@ public class AIState : MonoBehaviour
                 }
                 else 
                 {
+                    if (!isInvoking)
+                    {
                         StartCoroutine(InvokeEnemies());
-                    
+                    }
                 }
             }
             else
@@ -193,14 +196,14 @@ public class AIState : MonoBehaviour
 
     private bool CheckForMaxPumpkins()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("JackPumpkin");
 
-        // Si el número de enemigos es menor que el máximo, devuelve false
-        if (enemies.Length < maxEnemies)
+        // Si el número de enemigos es mayor que el máximo, devuelve false
+        if (enemies.Length >= maxEnemies)
         {
             return true;
         }
-        // Si no, devuelve true
+        // Si no, devuelve false
         else
         {
             return false;
@@ -208,6 +211,7 @@ public class AIState : MonoBehaviour
     }
     IEnumerator InvokeEnemies()
     {
+        isInvoking = true;
         for (int i = 0; i < 2; i++)
         {
             // Invoca un enemigo
@@ -217,8 +221,9 @@ public class AIState : MonoBehaviour
             enemy.tag = enemyTag;
 
             // Espera un segundo antes de volver a invocar
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(4);
         }
+        isInvoking = false;
     }
     void Chase()
     {
