@@ -124,6 +124,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &58646454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1914587188084210, guid: 75091f22d3571b54692c21ede47552a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 988433572}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &237978175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -680,6 +686,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64081971649229104, guid: 75091f22d3571b54692c21ede47552a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -739,6 +750,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4778800597085614, guid: 75091f22d3571b54692c21ede47552a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64081971649229104, guid: 75091f22d3571b54692c21ede47552a0,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -857,11 +873,12 @@ MonoBehaviour:
   spawnPoint: {fileID: 1180149007}
   enemyTag: JackPumpkin
   tombs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1543330154}
+  - {fileID: 1186074948}
+  - {fileID: 1959578455}
+  - {fileID: 58646454}
+  - {fileID: 1228335260}
+  teleportCooldown: 5
   anim: {fileID: 1072211431}
 --- !u!136 &1072211430
 CapsuleCollider:
@@ -1068,6 +1085,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1072211426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1186074948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1914587188084210, guid: 75091f22d3571b54692c21ede47552a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1465673689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1224072386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4019337590489128, guid: 68498a26fc9eecc4abcc531636b680f3,
@@ -1079,6 +1102,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4019337590489128, guid: 68498a26fc9eecc4abcc531636b680f3,
     type: 3}
   m_PrefabInstance: {fileID: 597096887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1228335260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1914587188084210, guid: 75091f22d3571b54692c21ede47552a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1649665417}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1345561019
 PrefabInstance:
@@ -1142,6 +1171,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: JackWeight-01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 628d9f896b56c8f47a49e2f64871a2e9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tomb
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 628d9f896b56c8f47a49e2f64871a2e9,
         type: 3}
@@ -1384,6 +1418,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64081971649229104, guid: 75091f22d3571b54692c21ede47552a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1394,6 +1433,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4019337590489128, guid: 68498a26fc9eecc4abcc531636b680f3,
     type: 3}
   m_PrefabInstance: {fileID: 1609412394}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1543330154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1914587188084210, guid: 75091f22d3571b54692c21ede47552a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1009430378}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1609412394
 PrefabInstance:
@@ -1512,6 +1557,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64081971649229104, guid: 75091f22d3571b54692c21ede47552a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1615,11 +1665,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64081971649229104, guid: 75091f22d3571b54692c21ede47552a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75091f22d3571b54692c21ede47552a0, type: 3}
+--- !u!1 &1959578455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1914587188084210, guid: 75091f22d3571b54692c21ede47552a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1932362206}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2011752808 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5311668992100948408, guid: 628d9f896b56c8f47a49e2f64871a2e9,

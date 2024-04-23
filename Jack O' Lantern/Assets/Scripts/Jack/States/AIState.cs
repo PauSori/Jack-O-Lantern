@@ -1,5 +1,5 @@
 using Opsive.UltimateCharacterController.Game;
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -46,25 +46,20 @@ public class AIState : MonoBehaviour
     public int maxEnemies = 10;
     public GameObject enemyPrefab;
     private bool isInvoking = false;
-
-    // Definir el punto de aparición
     public Transform spawnPoint;
-
-    // Definir la etiqueta del enemigo
     public string enemyTag = "JackPumpkin";
     #endregion
 
     #region Tombs Settings
     [Header("Tombs Settings")]
-    public List<GameObject> tombs;
-    private bool isTeleporting = false;  // Nueva variable
+    public GameObject[] tombs;
+    public float teleportCooldown = 5f; // Tiempo de cooldown en segundos.
+    private float lastTeleportTime;
+    private GameObject lastTomb;
     #endregion
 
     public Animator anim;
 
-    //COSAS QUE FALTAN
-    //ATAQUE
-    //SALTO HACIA ATRAS
 
     public void Start()
     {
@@ -72,6 +67,7 @@ public class AIState : MonoBehaviour
         startPosition = transform.position;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         anim = GetComponent<Animator>();
+        lastTeleportTime = -teleportCooldown;
         attackCollider.enabled = false;
     }
     private void Update()
@@ -112,8 +108,7 @@ public class AIState : MonoBehaviour
                     }
                     else
                     {
-                            StartCoroutine(InvokeEnemies());
-                        
+                        StartCoroutine(InvokeEnemies());
                     }
                 }
                 else
@@ -121,7 +116,6 @@ public class AIState : MonoBehaviour
                     if (isInMeleeRange)
                     {
                         MeleeAttack();
-                        Dash();
                     }
                     else if (isInMidRange)
                     {
@@ -163,7 +157,6 @@ public class AIState : MonoBehaviour
                 if (isInMeleeRange)
                 {
                   MeleeAttack();
-                  Dash();
                 }
                 else if (isInMidRange)
                 {
@@ -172,11 +165,6 @@ public class AIState : MonoBehaviour
             }
         }
     }
-    private void Dash()
-    {
-        Debug.Log("DASH");
-    }
-
     public bool IsHalfLife(float vidaActual, float vidaTotal)
     {
         if (vidaActual <= vidaTotal / 2)
@@ -189,9 +177,53 @@ public class AIState : MonoBehaviour
         }
     }
 
+    public void CheckForRanges()
+    {
+        distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+        isInMeleeRange = false;
+        isInMidRange = false;
+        isInLongRange = false;
+
+        if (distanceToPlayer <= meleeRange)
+        {
+            isInMeleeRange = true;
+        }
+        else if (distanceToPlayer <= midRange)
+        {
+            isInMidRange = true;
+        }
+        else if (distanceToPlayer <= longRange)
+        {
+            isInLongRange = true;
+        }
+    }
+
+    void Chase()
+    {
+        Vector3 direction = player.position - transform.position;
+        float zigzag = Mathf.Sin(Time.time * zigzagSpeed) * zigzagDistance;
+
+        transform.position += (direction.normalized + new Vector3(zigzag, 0, 0)) * speed * Time.deltaTime;
+
+    }
+
+    public void LookAt()
+    {
+        // Hacer que el enemigo siempre mire al jugador, pero solo en la dirección horizontal
+        Vector3 playerPositionSameLevel = new Vector3(player.position.x, transform.position.y, player.position.z);
+        transform.LookAt(playerPositionSameLevel);
+    }
+
     private void MeleeAttack()
     {
-        Debug.Log("ATAQUE A MELEE");
+        anim.Play("Melee_Attack");
+
+        // Calcula la posición de teletransporte
+        Vector3 posicionTP = transform.position - transform.forward * jumpDistance;
+
+        // Teletransporta a tu personaje
+        transform.position = posicionTP;
     }
 
     private bool CheckForMaxPumpkins()
@@ -225,55 +257,37 @@ public class AIState : MonoBehaviour
         }
         isInvoking = false;
     }
-    void Chase()
-    {
-        Vector3 direction = player.position - transform.position;
-        float zigzag = Mathf.Sin(Time.time * zigzagSpeed) * zigzagDistance;
-
-        transform.position += (direction.normalized + new Vector3(zigzag, 0, 0)) * speed * Time.deltaTime;
-
-        anim.SetFloat("Zigzag", zigzag / zigzagDistance);
-    }
-
-    public void LookAt()
-    {
-        // Hacer que el enemigo siempre mire al jugador, pero solo en la dirección horizontal
-        Vector3 playerPositionSameLevel = new Vector3(player.position.x, transform.position.y, player.position.z);
-        transform.LookAt(playerPositionSameLevel);
-    }
-
-    public void CheckForRanges()
-    {
-        distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-
-        isInMeleeRange = false;
-        isInMidRange = false;
-        isInLongRange = false;
-
-        if (distanceToPlayer <= meleeRange)
-        {
-            isInMeleeRange = true;
-        }
-        else if (distanceToPlayer <= midRange)
-        {
-            isInMidRange = true;
-        }
-        else if (distanceToPlayer <= longRange)
-        {
-            isInLongRange = true;
-        }
-    }
+    
 
     public void TeleportToTomb()
     {
-        Debug.Log("TP A TUMBAS");
+        if (Time.time - lastTeleportTime >= teleportCooldown)
+        {
+            GameObject randomTomb;
+            do
+            {
+                // Selecciona una tumba aleatoria.
+                int randomIndex = Random.Range(0, tombs.Length);
+                randomTomb = tombs[randomIndex];
+            }
+            while (randomTomb == lastTomb); // Continúa seleccionando una tumba aleatoria hasta que no sea la misma que la última.
+
+            // Teletransporta tu personaje a la tumba seleccionada.
+            transform.position = randomTomb.transform.position;
+
+            // Actualiza el tiempo del último teletransporte y la última tumba.
+            lastTeleportTime = Time.time;
+            lastTomb = randomTomb;
+        }
     }
 
     public bool CheckForTombs()
     {
-        if (GameManager.instance.tombs.Count > 0 && !isTeleporting)
+        // Supongamos que 'Tomb' es el tag que has asignado a las tumbas en tu juego.
+        GameObject[] tombs = GameObject.FindGameObjectsWithTag("Tomb");
+
+        if (tombs.Length > 0)
         {
-            TeleportToTomb();
             return true;
         }
         else
