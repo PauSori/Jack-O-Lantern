@@ -156,7 +156,8 @@ MonoBehaviour:
   parentObject: {fileID: 1963654251145166574}
   turretMode: 1
   slider: {fileID: 6050096456430035822}
-  attackMelee: {fileID: 0}
+  attackMelee: {fileID: 7035882125870191205, guid: a091d719a2573a34fa101d95639a50a4,
+    type: 3}
 --- !u!136 &7275366881518960704
 CapsuleCollider:
   m_ObjectHideFlags: 0
