@@ -907,7 +907,7 @@ MonoBehaviour:
         m_Delay: 0
         m_AllowMultiHits: 0
         m_UseContextData: 1
-        m_SurfaceImpact: {fileID: 11400000, guid: c5ab4290ae28ad645a9e5b3483fc05cb,
+        m_SurfaceImpact: {fileID: 11400000, guid: 39f7f8087c25c66459cca14d29f1d1aa,
           type: 2}
     - rid: 5031304976696344657
       type: {class: ImpactEvent, ns: Opsive.UltimateCharacterController.Items.Actions.Impact,
