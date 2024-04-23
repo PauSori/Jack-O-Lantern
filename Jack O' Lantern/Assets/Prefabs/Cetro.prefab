@@ -862,7 +862,7 @@ MonoBehaviour:
         m_AudioClipSet:
           m_AudioConfig: {fileID: 0}
           m_AudioClips:
-          - {fileID: 8300000, guid: 9635aab5329b2574a93b7b69c36d742c, type: 3}
+          - {fileID: 0}
     - rid: 4821689494049128458
       type: {class: GenericShootableImpactModule, ns: Opsive.UltimateCharacterController.Items.Actions.Modules.Shootable,
         asm: Opsive.UltimateCharacterController}
