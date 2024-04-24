@@ -56,6 +56,8 @@ public class AIState : MonoBehaviour
     public float teleportCooldown = 5f; // Tiempo de cooldown en segundos.
     private float lastTeleportTime;
     private GameObject lastTomb;
+    public GameObject jackProjectile;
+    public GameObject jackMagicHand;
     #endregion
 
     public Animator anim;
@@ -274,6 +276,9 @@ public class AIState : MonoBehaviour
 
             // Teletransporta tu personaje a la tumba seleccionada.
             transform.position = randomTomb.transform.position;
+
+            // Instancia el objeto en la posición de la tumba.
+            Instantiate(jackProjectile, jackMagicHand.transform.position, Quaternion.identity);
 
             // Actualiza el tiempo del último teletransporte y la última tumba.
             lastTeleportTime = Time.time;
