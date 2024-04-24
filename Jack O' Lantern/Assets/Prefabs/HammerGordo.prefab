@@ -709,6 +709,38 @@ MonoBehaviour:
             m_AudioClipSet:
               m_AudioConfig: {fileID: 0}
               m_AudioClips: []
+          - m_States:
+            - m_Name: Default
+              m_Preset: {fileID: 0}
+              m_BlockList: []
+              m_Default: 1
+            m_Enabled: 1
+            m_AllowDuringMovement: 1
+            m_RequireGrounded: 0
+            m_StateName: 
+            m_ItemSubstateIndex: 3
+            m_AudioClipSet:
+              m_AudioConfig: {fileID: 0}
+              m_AudioClips: []
+          - m_States:
+            - m_Name: FirstPerson
+              m_Preset: {fileID: 11400000, guid: 561d81a64dc9ae64891e249daa52cdee,
+                type: 2}
+              m_BlockList: []
+              m_Default: 0
+            - m_Name: Default
+              m_Preset: {fileID: 0}
+              m_BlockList: []
+              m_Default: 1
+            m_Enabled: 1
+            m_AllowDuringMovement: 1
+            m_RequireGrounded: 0
+            m_StateName: 
+            m_ItemSubstateIndex: 4
+            m_AudioClipSet:
+              m_AudioConfig: {fileID: 0}
+              m_AudioClips:
+              - {fileID: 0}
         m_AllowAttackCombos: 1
     - rid: 5031305296026533903
       type: {class: SimpleAttack, ns: Opsive.UltimateCharacterController.Items.Actions.Modules.Melee,

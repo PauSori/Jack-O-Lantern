@@ -20565,7 +20565,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.27205884, g: 0.042009078, b: 0.113403805, a: 1}
+      maxColor: {r: 0.3962264, g: 0, b: 0.09684776, a: 0.84705883}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -25128,7 +25128,7 @@ Transform:
   m_GameObject: {fileID: 546830806}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6591681, y: -0, z: -0, w: 0.7519956}
-  m_LocalPosition: {x: 0.081, y: 5.023, z: 2.94}
+  m_LocalPosition: {x: 0.081, y: 5.023, z: 2.916}
   m_LocalScale: {x: 0.6002877, y: 0.30014157, z: 0.17409317}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50318,7 +50318,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a1712de215fd86a41a309d877bd43eeb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.419
+      value: 0.835
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a1712de215fd86a41a309d877bd43eeb,
         type: 3}
@@ -50370,6 +50370,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kneeling
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: a1712de215fd86a41a309d877bd43eeb,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 79fdd7cfb9c25ef4da4614d4709cfd34, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -61182,7 +61187,7 @@ MonoBehaviour:
   textComponent: {fileID: 662007584}
   lines:
   - Plano players
-  - tonto el que lo lea
+  - Plano Players
   textSpeed: 0.27
   booleana: {fileID: 1969664079}
 --- !u!114 &1525319933
@@ -61696,6 +61701,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: flaco
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 993593f167d7c9249baba51f5d9edaf5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4418834999246775707, guid: 993593f167d7c9249baba51f5d9edaf5,
         type: 3}
