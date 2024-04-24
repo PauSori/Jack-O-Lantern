@@ -14,8 +14,17 @@ public class PlayerHealthController : MonoBehaviour
     void Start()
     {
         healthSlider= GameObject.Find("HealthPlayer").GetComponent<Slider>();
+
+
         hitPlayerDamage.SetActive(false);
+        curado.SetActive(false);
         gameOver.SetActive(false);
+    }
+    private void Awake()
+    {
+        hitPlayerDamage = GameObject.Find("HealthFlash");
+        gameOver = GameObject.Find("Gameover");
+        curado = GameObject.Find("HealthFlashCure");
     }
 
     // Update is called once per frame
