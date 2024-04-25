@@ -307,7 +307,6 @@ GameObject:
   - component: {fileID: 946425823977862846}
   - component: {fileID: 4992191082686893679}
   - component: {fileID: 1754908168753277725}
-  - component: {fileID: 62718749767199644}
   - component: {fileID: 3263860657074973134}
   m_Layer: 0
   m_Name: Cetro
@@ -559,35 +558,6 @@ MonoBehaviour:
   m_StepForceScale: 1
   m_StepPositionBalance: 0
   m_StepRotationBalance: 0
---- !u!114 &62718749767199644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5424954537926657405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5b5dc98af0593b4589b67fcfc5b4c85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_States:
-  - m_Name: Default
-    m_Preset: {fileID: 0}
-    m_BlockList: []
-    m_Default: 1
-  m_Object: {fileID: 758678231589617284}
-  m_SpawnParent:
-    m_ID: -1
-    m_Object: {fileID: 0}
-  m_LocalSpawnPosition: {x: 0, y: 0, z: 0}
-  m_LocalSpawnRotation: {x: 0, y: 0, z: 0}
-  m_LocalSpawnScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_NonDominantHandIKTarget: {fileID: 0}
-  m_NonDominantHandIKTargetHint: {fileID: 0}
-  m_HolsterTarget:
-    m_ID: -1
-    m_Object: {fileID: 0}
 --- !u!114 &3263860657074973134
 MonoBehaviour:
   m_ObjectHideFlags: 0
