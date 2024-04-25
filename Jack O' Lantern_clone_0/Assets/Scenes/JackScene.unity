@@ -25002,8 +25002,9 @@ MonoBehaviour:
   - {fileID: 58646454}
   - {fileID: 1228335260}
   teleportCooldown: 5
-  jackProjectile: {fileID: 0}
-  jackMagicHand: {fileID: 0}
+  jackProjectile: {fileID: 4867386275902331738, guid: 4d55f5052de49294891e9bb4e2fa9860,
+    type: 3}
+  jackMagicHand: {fileID: 1629630716}
   anim: {fileID: 1072211431}
 --- !u!136 &1072211430
 CapsuleCollider:
@@ -37084,6 +37085,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 628d9f896b56c8f47a49e2f64871a2e9,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 628d9f896b56c8f47a49e2f64871a2e9,
+        type: 3}
       propertyPath: m_TagString
       value: Tomb
       objectReference: {fileID: 0}
@@ -44230,6 +44236,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4391849779348702, guid: f772fb8387a9c9948bcec7837062a672,
     type: 3}
   m_PrefabInstance: {fileID: 1621156203}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1629630716 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5018379532661687462, guid: 628d9f896b56c8f47a49e2f64871a2e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1345561019}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1632498650
 PrefabInstance:
