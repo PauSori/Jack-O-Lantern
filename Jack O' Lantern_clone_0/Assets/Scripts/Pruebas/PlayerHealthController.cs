@@ -20,12 +20,6 @@ public class PlayerHealthController : MonoBehaviour
         curado.SetActive(false);
         gameOver.SetActive(false);
     }
-    private void Awake()
-    {
-        hitPlayerDamage = GameObject.Find("HealthFlash");
-        gameOver = GameObject.Find("Gameover");
-        curado = GameObject.Find("HealthFlashCure");
-    }
 
     // Update is called once per frame
     void Update()

@@ -167,6 +167,8 @@ public class AIState : MonoBehaviour
             }
         }
     }
+    
+
     public bool IsHalfLife(float vidaActual, float vidaTotal)
     {
         if (vidaActual <= vidaTotal / 2)
@@ -219,13 +221,12 @@ public class AIState : MonoBehaviour
 
     private void MeleeAttack()
     {
-        anim.Play("Melee_Attack");
-
         // Calcula la posición de teletransporte
         Vector3 posicionTP = transform.position - transform.forward * jumpDistance;
 
         // Teletransporta a tu personaje
         transform.position = posicionTP;
+
     }
 
     private bool CheckForMaxPumpkins()
@@ -248,17 +249,28 @@ public class AIState : MonoBehaviour
         isInvoking = true;
         for (int i = 0; i < 2; i++)
         {
+            // Comienza la animación
+            anim.SetBool("isInvoking", true);
+
+            // Espera hasta que la animación se complete
+            yield return new WaitForSeconds(2.028f);
+
             // Invoca un enemigo
             GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
 
             // Asegúrate de asignar la etiqueta al enemigo invocado
             enemy.tag = enemyTag;
 
+            // Detiene la animación
+            anim.SetBool("isInvoking", false);
+
             // Espera un segundo antes de volver a invocar
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(2.028f);
         }
         isInvoking = false;
+
     }
+    
     
 
     public void TeleportToTomb()

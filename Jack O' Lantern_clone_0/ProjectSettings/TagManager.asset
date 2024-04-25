@@ -12,6 +12,8 @@ TagManager:
   - bullet
   - JackPumpkin
   - arrow
+  - Flaco
+  - Gordo
   layers:
   - Default
   - TransparentFX
