@@ -29,8 +29,6 @@ public class AIState : MonoBehaviour
     #region BossChase
     [Header("BossChase")]
     public float speed = 2f;
-    public float zigzagSpeed = 2f;
-    public float zigzagDistance = 2f;
     public Transform player;
     private Vector3 startPosition;
     #endregion
@@ -38,14 +36,14 @@ public class AIState : MonoBehaviour
     #region MeleeAttack
     [Header("MeleeAttack")]
     public Collider attackCollider;
-    public float jumpDistance = 10f;
+    public float jumpDistance = 2f;
     #endregion
 
     #region InvokeEnemy Settings
     [Header("InvokeSettings")]
     public int maxEnemies = 10;
     public GameObject enemyPrefab;
-    private bool isInvoking = false;
+    private bool _isInvoking = false;
     public Transform spawnPoint;
     public string enemyTag = "JackPumpkin";
     #endregion
@@ -135,7 +133,7 @@ public class AIState : MonoBehaviour
         {
             if (isInLongRange)
             {
-                if(CheckForMaxPumpkins())
+                if (CheckForMaxPumpkins())
                 {
                     if (isInMeleeRange)
                     {
@@ -148,7 +146,7 @@ public class AIState : MonoBehaviour
                 }
                 else 
                 {
-                    if (!isInvoking)
+                    if (!_isInvoking)
                     {
                         StartCoroutine(InvokeEnemies());
                     }
@@ -192,24 +190,25 @@ public class AIState : MonoBehaviour
         if (distanceToPlayer <= meleeRange)
         {
             isInMeleeRange = true;
+            attackCollider.enabled = true;
         }
         else if (distanceToPlayer <= midRange)
         {
             isInMidRange = true;
+            attackCollider.enabled = false;
         }
         else if (distanceToPlayer <= longRange)
         {
             isInLongRange = true;
+            attackCollider.enabled = false;
         }
     }
 
     void Chase()
     {
         Vector3 direction = player.position - transform.position;
-        float zigzag = Mathf.Sin(Time.time * zigzagSpeed) * zigzagDistance;
-
-        transform.position += (direction.normalized + new Vector3(zigzag, 0, 0)) * speed * Time.deltaTime;
-
+        transform.position += direction.normalized * speed * Time.deltaTime;
+        SetAnimationState(1);
     }
 
     public void LookAt()
@@ -221,12 +220,22 @@ public class AIState : MonoBehaviour
 
     private void MeleeAttack()
     {
+        SetAnimationState(4);
+        AnimationEvent();
+    }
+    private void AnimationEvent()
+    {
+        SetAnimationState(3);
+        Invoke("TP", 1.012f); // Llama a la función TP después de 2 segundos (o el tiempo que dure tu animación)
+    }
+
+    private void TP()
+    {
         // Calcula la posición de teletransporte
         Vector3 posicionTP = transform.position - transform.forward * jumpDistance;
 
         // Teletransporta a tu personaje
         transform.position = posicionTP;
-
     }
 
     private bool CheckForMaxPumpkins()
@@ -246,12 +255,10 @@ public class AIState : MonoBehaviour
     }
     IEnumerator InvokeEnemies()
     {
-        isInvoking = true;
+        _isInvoking = true;
         for (int i = 0; i < 2; i++)
         {
-            // Comienza la animación
-            anim.SetBool("isInvoking", true);
-
+            SetAnimationState(2);
             // Espera hasta que la animación se complete
             yield return new WaitForSeconds(2.028f);
 
@@ -261,13 +268,11 @@ public class AIState : MonoBehaviour
             // Asegúrate de asignar la etiqueta al enemigo invocado
             enemy.tag = enemyTag;
 
-            // Detiene la animación
-            anim.SetBool("isInvoking", false);
 
             // Espera un segundo antes de volver a invocar
-            yield return new WaitForSeconds(2.028f);
+            yield return new WaitForSeconds(1);
         }
-        isInvoking = false;
+        _isInvoking = false;
 
     }
     
@@ -275,6 +280,10 @@ public class AIState : MonoBehaviour
 
     public void TeleportToTomb()
     {
+        isInMeleeRange = false;
+        isInMidRange = false;
+        isInLongRange = false;
+
         if (Time.time - lastTeleportTime >= teleportCooldown)
         {
             GameObject randomTomb;
@@ -311,6 +320,11 @@ public class AIState : MonoBehaviour
         {
             return false;
         }
+    }
+    void SetAnimationState(int state)
+    {
+        // Usa SetInt para cambiar el estado de la animación
+        anim.SetInteger("State", state);
     }
     void OnDrawGizmosSelected()
     {
