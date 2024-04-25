@@ -47,6 +47,15 @@ public class PlayerHealthController : MonoBehaviour
         }
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("bullet"))
+        {
+            healthSlider.value -= 0.1f;
+            hitPlayerDamage.SetActive(true);
+            Invoke("hitPlayer", 0.5f);
+        }
+    }
     public void hitPlayer()
     {
         hitPlayerDamage.SetActive(false);
