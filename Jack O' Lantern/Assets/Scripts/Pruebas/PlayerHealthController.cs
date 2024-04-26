@@ -13,7 +13,7 @@ public class PlayerHealthController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthSlider= GameObject.Find("HealthPlayer").GetComponent<Slider>();
+        healthSlider= GameObject.Find("Health").GetComponent<Slider>();
 
 
         hitPlayerDamage.SetActive(false);
