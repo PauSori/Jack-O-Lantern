@@ -43356,9 +43356,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 584565240}
   lines:
-  - Plano corto
-  - Demonio
-  textSpeed: 0.27
+  - "SILENCI EST\xDAPIDS !!! "
+  - "Per aix\xF2 vull que aneu als llocs on em la va jugar per debilitar-me i recolliu
+    els objectes per debilitar-lo a ell."
+  - "Ara, marxeu! No vull que torneu per aqu\xED fins que l\u2019h\xE0giu derrotat."
+  textSpeed: 0.06
   booleana: {fileID: 127783202}
 --- !u!114 &1232979796
 MonoBehaviour:
@@ -61136,9 +61138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 662007584}
   lines:
-  - Plano players
-  - Plano Players
-  textSpeed: 0.27
+  - "\xC9s tot un plaer, Majestat, per\xF2\u2026 com ho podem aconseguir ?"
+  - "Jack \xE9s massa fort per poder derrotar-lo."
+  textSpeed: 0.06
   booleana: {fileID: 1969664079}
 --- !u!114 &1525319933
 MonoBehaviour:
@@ -82613,9 +82615,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 562984670}
   lines:
-  - Plano bajando
-  - al demonio
-  textSpeed: 0.27
+  - "Escolteu-me b\xE9, miserables parell d'imb\xE8cils, compliu les meves ordres
+    si voleu seguir existin."
+  - "Sou els escollits, la vostra exist\xE8ncia \xE9s una oportunitat per demostrar
+    la vostra lleialtat i valentia."
+  - "Vull que pareu els peus en Jack, m\u2019est\xE0 prenent les \xE0nimes que em
+    pertanyen i s\u2019est\xE0 descontrolant."
+  textSpeed: 0.06
   booleana: {fileID: 785949486}
 --- !u!114 &2028730782
 MonoBehaviour:
