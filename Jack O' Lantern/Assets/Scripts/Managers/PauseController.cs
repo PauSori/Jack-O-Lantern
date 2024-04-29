@@ -33,7 +33,7 @@ public class PauseController : MonoBehaviour
         }
         else if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7)) && pausaActiva == true)
         {
-            pausaActiva = false;
+
             Resume();
         }
     }
@@ -48,6 +48,7 @@ public class PauseController : MonoBehaviour
     }
     public void Resume()
     {
+        pausaActiva = false;
         Time.timeScale = 1.0f;
         Debug.Log("despausa");
         Cursor.lockState = CursorLockMode.Locked;
