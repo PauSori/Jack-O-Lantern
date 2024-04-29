@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/FinalGame.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 30e5339bb77f92d4fbb05c4381248c0c
+  - enabled: 1
+    path: Assets/Scenes/Cinematica.unity
+    guid: a9e8920976736184ab7c31003ce9c468
+  - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: 83141a7fd269798489c791d55e62d1c8
   - enabled: 1

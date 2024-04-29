@@ -60,11 +60,11 @@ public class ZombieController : MonoBehaviour
                 AttackPlayer();
                 break;
         }
-        /*if (slider.value <= 0)
+        if (slider.value <= 0)
         {
             Debug.Log("Muerto");
             OnDestroy();
-        }*/
+        }
 
     }
 
@@ -97,7 +97,11 @@ public class ZombieController : MonoBehaviour
             currentState = Zombie.Chasing;
             playerDetected = true;
         }
-
+        if (slider.value < 1f && Vector3.Distance(transform.position, player.position) < detectionRange)
+        {
+            currentState = Zombie.Chasing;
+            playerDetected = true;
+        }
         //if(Vector3.Distance(transform.position, player.position) < detectionRange)
         //{
         //    currentState = Zombie.Chasing;
