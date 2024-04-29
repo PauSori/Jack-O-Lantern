@@ -20,17 +20,4 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("PruebaMapa");
     }
-    public void Cinmetica()
-    {
-        SceneManager.LoadScene("Cinematica");
-    }
-    public void exitGame()
-    {
-        Debug.Log("se ha salido");
-        Application.Quit();
-    }
-    public void Menu()
-    {
-        SceneManager.LoadScene("Menu");
-    }
 }
