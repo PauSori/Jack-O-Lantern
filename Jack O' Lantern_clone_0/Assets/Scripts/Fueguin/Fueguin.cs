@@ -6,8 +6,6 @@ using UnityEngine.AI;
 
 public class Fueguin : MonoBehaviour
 {
-    public GameObject panelSeñal;
-
     public Transform player;
     public float speed = 2.0f;
     public Vector3 offset = new Vector3(1, 0, 0);
@@ -24,10 +22,7 @@ public class Fueguin : MonoBehaviour
     private Collider closestObject;
     public GameObject Player; // NUEVO IMPLEMENTADO // Nueva variable para la distancia máxima
 
-    private void Start()
-    {
-        panelSeñal.SetActive(false);
-    }
+
     void Update()
     {
         CheckStates();
@@ -102,7 +97,6 @@ public class Fueguin : MonoBehaviour
         {
             Debug.Log("Objeto encontrado");
             Debug.Log("Distancetoplayer:" + distanceToPlayer);
-            panelSeñal.SetActive(true);
             objectInArea = true;
             float closestDistanceSqr = Mathf.Infinity;
             foreach (Collider obj in objects)
@@ -141,7 +135,6 @@ public class Fueguin : MonoBehaviour
     private void FollowPlayer()
     {
         Debug.Log("dins follow player");
-        panelSeñal.SetActive(false);
         Vector3 newPos = player.position + offset;
         transform.position = Vector3.Lerp(transform.position, newPos, speed * Time.deltaTime);
     }

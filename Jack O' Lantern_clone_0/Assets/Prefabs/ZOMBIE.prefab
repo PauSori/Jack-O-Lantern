@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 8268771706478447328}
   - component: {fileID: 1620573878670005108}
   - component: {fileID: 3815006085931558502}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: Health (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,6 @@ GameObject:
   - component: {fileID: 7371923445600083260}
   - component: {fileID: 3905795616996845707}
   - component: {fileID: 7507454973936616065}
-  - component: {fileID: 2525235340546800824}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -848,11 +847,10 @@ Transform:
   m_GameObject: {fileID: 3652630656982780882}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.055821486, z: 0, w: 0.9984408}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.6, y: 0, z: 3.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6642466605499386862}
   - {fileID: 5399436322539784748}
   - {fileID: 8730633138855865331}
   - {fileID: 5234789112421017303}
@@ -934,7 +932,7 @@ MonoBehaviour:
   chaseSpeed: 2
   detectionRange: 10
   detectionAngle: 70.5
-  attackRange: 2
+  attackRange: 1.5
   playerDetected: 0
   parentObject: {fileID: 6852101146934733629}
   slider: {fileID: 1620573878670005108}
@@ -1070,32 +1068,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_DamagedEffectName: 
   m_DamagedEffectIndex: -1
---- !u!114 &2525235340546800824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3652630656982780882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232d5fad763e23a43a9ad6c3cc277046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_States:
-  - m_Name: Default
-    m_Preset: {fileID: 0}
-    m_BlockList: []
-    m_Default: 1
-  m_EnemyLayers:
-    serializedVersion: 2
-    m_Bits: 67108864
-  m_InvisibleLayers:
-    serializedVersion: 2
-    m_Bits: 1879048230
-  m_SolidObjectLayers:
-    serializedVersion: 2
-    m_Bits: 2415919051
 --- !u!1 &3885996411471264508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1261,7 @@ GameObject:
   - component: {fileID: 8811368636804329837}
   - component: {fileID: 900121815089155317}
   - component: {fileID: 3035570463721957744}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1525,7 +1497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 428837823801186618}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1911,7 +1883,7 @@ GameObject:
   - component: {fileID: 6084077152622396789}
   - component: {fileID: 1857677686870005938}
   - component: {fileID: 3070465384611907764}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2012,7 +1984,7 @@ GameObject:
   - component: {fileID: 5032699047266723256}
   - component: {fileID: 7007000613940678549}
   - component: {fileID: 9126471090297453843}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2152,7 +2124,7 @@ GameObject:
   - component: {fileID: 4047757757426963209}
   - component: {fileID: 1224639904878617594}
   - component: {fileID: 1211346398729405546}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2312,121 +2284,3 @@ Transform:
   - {fileID: 5098393160979297041}
   m_Father: {fileID: 2001723954520594912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &9105545184135386626
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6642466605499386862}
-  - component: {fileID: 2328165175868905321}
-  - component: {fileID: 4961846617027483323}
-  m_Layer: 0
-  m_Name: Point Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6642466605499386862
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9105545184135386626}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.1356889, z: -0, w: -0.9907515}
-  m_LocalPosition: {x: 0, y: 0.56, z: 0}
-  m_LocalScale: {x: 0.29999995, y: 0.19999999, z: 0.29999995}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1721971443509350532}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &2328165175868905321
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9105545184135386626}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 2
-  m_Shape: 0
-  m_Color: {r: 0.9433962, g: 0.63892543, b: 0.25364897, a: 1}
-  m_Intensity: 4
-  m_Range: 4
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 1
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 0
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!114 &4961846617027483323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9105545184135386626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
