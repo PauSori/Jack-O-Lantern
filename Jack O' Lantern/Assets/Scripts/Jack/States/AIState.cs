@@ -50,16 +50,23 @@ public class AIState : MonoBehaviour
 
     #region Tombs Settings
     [Header("Tombs Settings")]
-    public GameObject[] tombs;
+    public List<GameObject> tombs = new List<GameObject>();
     public float teleportCooldown = 5f; // Tiempo de cooldown en segundos.
     private float lastTeleportTime;
     private GameObject lastTomb;
     public GameObject jackProjectile;
     public GameObject jackMagicHand;
+    public string objectTag = "Tomb";
     #endregion
 
     public Animator anim;
 
+    public static AIState instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void Start()
     {
@@ -84,7 +91,6 @@ public class AIState : MonoBehaviour
             }
         }
     }
-
     public void CheckStates()
     {
         //MI PERSONAJE ESTA A MITAD DE VIDA
@@ -95,7 +101,7 @@ public class AIState : MonoBehaviour
             {
                 if (isInLongRange)
                 {
-                    if (!CheckForMaxPumpkins())
+                    if (CheckForMaxPumpkins())
                     {
                         if (isInMeleeRange)
                         {
@@ -108,7 +114,10 @@ public class AIState : MonoBehaviour
                     }
                     else
                     {
-                        StartCoroutine(InvokeEnemies());
+                        if (!_isInvoking)
+                        {
+                            StartCoroutine(InvokeEnemies());
+                        }
                     }
                 }
                 else
@@ -137,7 +146,7 @@ public class AIState : MonoBehaviour
                 {
                     if (isInMeleeRange)
                     {
-                            MeleeAttack();
+                        MeleeAttack();
                     }
                     else if(isInMidRange)
                     {
@@ -156,7 +165,7 @@ public class AIState : MonoBehaviour
             {
                 if (isInMeleeRange)
                 {
-                  MeleeAttack();
+                    MeleeAttack();
                 }
                 else if (isInMidRange)
                 {
@@ -221,14 +230,17 @@ public class AIState : MonoBehaviour
     private void MeleeAttack()
     {
         SetAnimationState(4);
-        AnimationEvent();
-    }
-    private void AnimationEvent()
-    {
-        SetAnimationState(3);
-        Invoke("TP", 1.012f); // Llama a la función TP después de 2 segundos (o el tiempo que dure tu animación)
+        StartCoroutine(DelayedTP());
     }
 
+    private IEnumerator DelayedTP()
+    {
+        // Espera 1 segundo
+        yield return new WaitForSeconds(1);
+
+        // Llama a la función TP
+        TP();
+    }
     private void TP()
     {
         // Calcula la posición de teletransporte
@@ -275,9 +287,6 @@ public class AIState : MonoBehaviour
         _isInvoking = false;
 
     }
-    
-    
-
     public void TeleportToTomb()
     {
         isInMeleeRange = false;
@@ -290,7 +299,7 @@ public class AIState : MonoBehaviour
             do
             {
                 // Selecciona una tumba aleatoria.
-                int randomIndex = Random.Range(0, tombs.Length);
+                int randomIndex = Random.Range(0, tombs.Count);
                 randomTomb = tombs[randomIndex];
             }
             while (randomTomb == lastTomb); // Continúa seleccionando una tumba aleatoria hasta que no sea la misma que la última.
@@ -298,6 +307,7 @@ public class AIState : MonoBehaviour
             // Teletransporta tu personaje a la tumba seleccionada.
             transform.position = randomTomb.transform.position;
 
+            SetAnimationState(5);
             // Instancia el objeto en la posición de la tumba.
             Instantiate(jackProjectile, jackMagicHand.transform.position, Quaternion.identity);
 
@@ -305,21 +315,23 @@ public class AIState : MonoBehaviour
             lastTeleportTime = Time.time;
             lastTomb = randomTomb;
         }
+
     }
 
     public bool CheckForTombs()
     {
-        // Supongamos que 'Tomb' es el tag que has asignado a las tumbas en tu juego.
-        GameObject[] tombs = GameObject.FindGameObjectsWithTag("Tomb");
-
-        if (tombs.Length > 0)
-        {
-            return true;
-        }
-        else
+        if(tombs.Count <= 0)
         {
             return false;
         }
+        else
+        {
+            return true;
+        }
+    }
+    public void RemoveGameObject(GameObject obj)
+    {
+        tombs.Remove(obj);
     }
     void SetAnimationState(int state)
     {
