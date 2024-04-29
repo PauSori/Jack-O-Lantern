@@ -1,96 +1,89 @@
 using Opsive.UltimateCharacterController.Game;
 //using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 
 public class AIState : MonoBehaviour
 {
-    #region Health Settings
+    // Health Settings
     [Header("Health Settings")]
-    public float maxHP = 100f;
-    public float currentHP;
-    int previousHP;
-    #endregion
+    public int maxHP = 100;
+    private int currentHP;
 
-    #region Detection Ranges
+    // Detection Ranges
     [Header("Detection Ranges")]
     public float meleeRange;
     public float midRange;
     public float longRange;
-    public bool isInMeleeRange = false;
-    public bool isInMidRange = false;
-    public bool isInLongRange = false;
-    private float distanceToPlayer;
+    public bool isInMeleeRange;
+    public bool isInMidRange;
+    public bool isInLongRange;
     private Transform playerTransform;
-    #endregion
+    public GameObject jack;
 
-    #region BossChase
-    [Header("BossChase")]
+    // Boss Chase
+    [Header("Boss Chase")]
     public float speed = 2f;
-    public Transform player;
-    private Vector3 startPosition;
-    #endregion
 
-    #region MeleeAttack
-    [Header("MeleeAttack")]
+    // Melee Attack
+    [Header("Melee Attack")]
     public Collider attackCollider;
-    public float jumpDistance = 2f;
-    #endregion
+    public float jumpDistance = 5f;
 
-    #region InvokeEnemy Settings
-    [Header("InvokeSettings")]
+    // Invoke Enemy Settings
+    [Header("Invoke Settings")]
     public int maxEnemies = 10;
     public GameObject enemyPrefab;
-    private bool _isInvoking = false;
     public Transform spawnPoint;
     public string enemyTag = "JackPumpkin";
-    #endregion
 
-    #region Tombs Settings
+    // Tombs Settings
     [Header("Tombs Settings")]
-    public GameObject[] tombs;
-    public float teleportCooldown = 5f; // Tiempo de cooldown en segundos.
+    public List<GameObject> tombs;
+    public float teleportCooldown = 5f;
     private float lastTeleportTime;
+    private bool isTeleportingToTomb = false;
     private GameObject lastTomb;
     public GameObject jackProjectile;
     public GameObject jackMagicHand;
-    #endregion
 
-    public Animator anim;
+    private Animator anim;
 
+    private bool isTeleporting;
+    private bool isInvoking;
 
-    public void Start()
+    private bool isDead = false;
+
+    private void Start()
     {
         currentHP = maxHP;
-        startPosition = transform.position;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         anim = GetComponent<Animator>();
         lastTeleportTime = -teleportCooldown;
         attackCollider.enabled = false;
     }
+
     private void Update()
     {
-        CheckStates();
-        CheckForRanges();
-        LookAt();
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!isDead)
         {
-            currentHP -= 10;
-            if (currentHP < 0)
+            // Solo realizar acciones si el personaje no está muerto
+            CheckStates();
+            LookAt();
+            CheckForRanges();
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                currentHP = 0;
+                TakeDamage(10);
             }
         }
     }
 
-    public void CheckStates()
+    private void CheckStates()
     {
-        //MI PERSONAJE ESTA A MITAD DE VIDA
-        if(IsHalfLife(currentHP, maxHP))
+        if (IsHalfLife())
         {
-            //COMPROBAR SI HAY TUMBAS
             if (!CheckForTombs())
             {
                 if (isInLongRange)
@@ -99,7 +92,7 @@ public class AIState : MonoBehaviour
                     {
                         if (isInMeleeRange)
                         {
-                            MeleeAttack();
+                            StartCoroutine(MeleeAttack());
                         }
                         else if (isInMidRange)
                         {
@@ -115,7 +108,7 @@ public class AIState : MonoBehaviour
                 {
                     if (isInMeleeRange)
                     {
-                        MeleeAttack();
+                        StartCoroutine(MeleeAttack());
                     }
                     else if (isInMidRange)
                     {
@@ -128,7 +121,6 @@ public class AIState : MonoBehaviour
                 TeleportToTomb();
             }
         }
-        //ESTOY A FULL VIDA
         else
         {
             if (isInLongRange)
@@ -137,16 +129,16 @@ public class AIState : MonoBehaviour
                 {
                     if (isInMeleeRange)
                     {
-                            MeleeAttack();
+                        StartCoroutine(MeleeAttack());
                     }
-                    else if(isInMidRange)
+                    else if (isInMidRange)
                     {
                         Chase();
                     }
                 }
-                else 
+                else
                 {
-                    if (!_isInvoking)
+                    if (!isInvoking)
                     {
                         StartCoroutine(InvokeEnemies());
                     }
@@ -156,7 +148,7 @@ public class AIState : MonoBehaviour
             {
                 if (isInMeleeRange)
                 {
-                  MeleeAttack();
+                    StartCoroutine(MeleeAttack());
                 }
                 else if (isInMidRange)
                 {
@@ -165,154 +157,155 @@ public class AIState : MonoBehaviour
             }
         }
     }
-    
 
-    public bool IsHalfLife(float vidaActual, float vidaTotal)
+    private bool IsHalfLife()
     {
-        if (vidaActual <= vidaTotal / 2)
-        {
-            return true; // El personaje está a mitad de vida o menos
-        }
-        else
-        {
-            return false; // El personaje tiene más de la mitad de vida
-        }
+        return currentHP <= maxHP / 2;
     }
 
-    public void CheckForRanges()
+    private void TakeDamage(int amount)
     {
-        distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        if (!isDead)
+        {
+            currentHP -= amount;
+            if (currentHP <= 0)
+            {
+                Die(); // Llamar a la función de muerte si la vida llega a cero o menos
+            }
+        }
+    }
+    private void Die()
+    {
+        isDead = true; // Marcar al personaje como muerto
+        SetAnimationState(7); // Reproducir la animación de muerte
 
+        // Desactivar todos los controles y comportamientos
         isInMeleeRange = false;
         isInMidRange = false;
         isInLongRange = false;
 
-        if (distanceToPlayer <= meleeRange)
+        // Deshabilitar cualquier otro comportamiento que pueda tener el personaje
+
+        // Esperar a que termine la animación de muerte antes de destruir el GameObject
+        StartCoroutine(DestroyAfterAnimation());
+    }
+    private IEnumerator DestroyAfterAnimation()
+    {
+        // Esperar a que la animación de muerte termine
+        yield return new WaitForSeconds(1);
+
+        // Destruir el GameObject actual
+        Destroy(gameObject);
+    }
+    private void CheckForRanges()
+    {
+        if (!isTeleporting)
         {
-            isInMeleeRange = true;
-            attackCollider.enabled = true;
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+            isInMeleeRange = distanceToPlayer <= meleeRange;
+            isInMidRange = distanceToPlayer > meleeRange && distanceToPlayer <= midRange;
+            isInLongRange = distanceToPlayer > midRange && distanceToPlayer <= longRange;
+
+            attackCollider.enabled = isInMeleeRange;
         }
-        else if (distanceToPlayer <= midRange)
-        {
-            isInMidRange = true;
-            attackCollider.enabled = false;
-        }
-        else if (distanceToPlayer <= longRange)
-        {
-            isInLongRange = true;
-            attackCollider.enabled = false;
-        }
+
     }
 
-    void Chase()
+    private void Chase()
     {
-        Vector3 direction = player.position - transform.position;
+        Vector3 direction = playerTransform.position - transform.position;
         transform.position += direction.normalized * speed * Time.deltaTime;
         SetAnimationState(1);
     }
 
-    public void LookAt()
+    private void LookAt()
     {
-        // Hacer que el enemigo siempre mire al jugador, pero solo en la dirección horizontal
-        Vector3 playerPositionSameLevel = new Vector3(player.position.x, transform.position.y, player.position.z);
+        Vector3 playerPositionSameLevel = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
         transform.LookAt(playerPositionSameLevel);
     }
 
-    private void MeleeAttack()
+    private IEnumerator MeleeAttack()
     {
         SetAnimationState(4);
-        AnimationEvent();
-    }
-    private void AnimationEvent()
-    {
+        yield return new WaitForSeconds(1);
+
         SetAnimationState(3);
-        Invoke("TP", 1.012f); // Llama a la función TP después de 2 segundos (o el tiempo que dure tu animación)
+        yield return new WaitForSeconds(1);
+
+        Teleport(jack, jumpDistance);
     }
 
-    private void TP()
+    private void Teleport(GameObject character, float distance)
     {
-        // Calcula la posición de teletransporte
-        Vector3 posicionTP = transform.position - transform.forward * jumpDistance;
+        isTeleporting = true;
+        SetAnimationState(6);
 
-        // Teletransporta a tu personaje
-        transform.position = posicionTP;
+        Vector3 currentPosition = character.transform.position;
+        Vector3 newPosition = currentPosition - character.transform.forward * distance;
+        character.transform.position = newPosition;
+
+        isTeleporting = false;
     }
 
     private bool CheckForMaxPumpkins()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("JackPumpkin");
-
-        // Si el número de enemigos es mayor que el máximo, devuelve false
-        if (enemies.Length >= maxEnemies)
-        {
-            return true;
-        }
-        // Si no, devuelve false
-        else
-        {
-            return false;
-        }
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        return enemies.Length >= maxEnemies;
     }
-    IEnumerator InvokeEnemies()
+
+    private IEnumerator InvokeEnemies()
     {
-        _isInvoking = true;
+        isInvoking = true;
         for (int i = 0; i < 2; i++)
         {
             SetAnimationState(2);
-            // Espera hasta que la animación se complete
             yield return new WaitForSeconds(2.028f);
 
-            // Invoca un enemigo
             GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-
-            // Asegúrate de asignar la etiqueta al enemigo invocado
             enemy.tag = enemyTag;
 
-
-            // Espera un segundo antes de volver a invocar
             yield return new WaitForSeconds(1);
         }
-        _isInvoking = false;
-
+        isInvoking = false;
     }
-    
-    
 
-    public void TeleportToTomb()
+    private void TeleportToTomb()
     {
-        isInMeleeRange = false;
-        isInMidRange = false;
-        isInLongRange = false;
-
+        isTeleportingToTomb = true;
         if (Time.time - lastTeleportTime >= teleportCooldown)
         {
+            SetAnimationState(5);
+
             GameObject randomTomb;
             do
             {
-                // Selecciona una tumba aleatoria.
-                int randomIndex = Random.Range(0, tombs.Length);
+                int randomIndex = Random.Range(0, tombs.Count);
                 randomTomb = tombs[randomIndex];
             }
-            while (randomTomb == lastTomb); // Continúa seleccionando una tumba aleatoria hasta que no sea la misma que la última.
+            while (randomTomb == lastTomb);
 
-            // Teletransporta tu personaje a la tumba seleccionada.
             transform.position = randomTomb.transform.position;
+            StartCoroutine(InstantiateProjectiles());
 
-            // Instancia el objeto en la posición de la tumba.
-            Instantiate(jackProjectile, jackMagicHand.transform.position, Quaternion.identity);
-
-            // Actualiza el tiempo del último teletransporte y la última tumba.
             lastTeleportTime = Time.time;
             lastTomb = randomTomb;
+        }
+        
+    }
+
+    private IEnumerator InstantiateProjectiles()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            Instantiate(jackProjectile, jackMagicHand.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(1);
         }
     }
 
     public bool CheckForTombs()
     {
-        // Supongamos que 'Tomb' es el tag que has asignado a las tumbas en tu juego.
-        GameObject[] tombs = GameObject.FindGameObjectsWithTag("Tomb");
-
-        if (tombs.Length > 0)
+        if (tombs.Count > 0)
         {
             return true;
         }
@@ -321,24 +314,26 @@ public class AIState : MonoBehaviour
             return false;
         }
     }
-    void SetAnimationState(int state)
+    private void OnDestroy()
     {
-        // Usa SetInt para cambiar el estado de la animación
+        // Elimina esta tumba de la lista cuando se destruye
+        tombs.Remove(this.gameObject);
+    }
+
+    private void SetAnimationState(int state)
+    {
         anim.SetInteger("State", state);
     }
-    void OnDrawGizmosSelected()
+
+    private void OnDrawGizmosSelected()
     {
-        // Dibuja una esfera roja para el rango melee
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, meleeRange);
 
-        // Dibuja una esfera amarilla para el rango medio
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, midRange);
 
-        // Dibuja una esfera verde para el rango largo
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, longRange);
     }
-
 }

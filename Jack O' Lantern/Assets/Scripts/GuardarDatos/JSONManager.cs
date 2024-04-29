@@ -30,4 +30,10 @@ public class JSONManager : MonoBehaviour
             Debug.Log(jsondata);
         }
     }
+
+
+    private class SaveObject
+    {
+        public int currentHP;
+    }
 }
