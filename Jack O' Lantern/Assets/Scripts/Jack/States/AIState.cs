@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIState : MonoBehaviour
 {
@@ -58,6 +59,10 @@ public class AIState : MonoBehaviour
     public GameObject jackMagicHand;
     public string objectTag = "Tomb";
     #endregion
+
+    [SerializeField] private NavMeshAgent agent;
+    private bool isFleeing = false;
+    private float fleeTime = 0f;
 
     public Animator anim;
 
@@ -199,24 +204,30 @@ public class AIState : MonoBehaviour
         if (distanceToPlayer <= meleeRange)
         {
             isInMeleeRange = true;
-            attackCollider.enabled = true;
         }
         else if (distanceToPlayer <= midRange)
         {
             isInMidRange = true;
-            attackCollider.enabled = false;
         }
         else if (distanceToPlayer <= longRange)
         {
             isInLongRange = true;
-            attackCollider.enabled = false;
         }
     }
 
     void Chase()
     {
-        Vector3 direction = player.position - transform.position;
-        transform.position += direction.normalized * speed * Time.deltaTime;
+        if (isFleeing) return;
+
+        agent.SetDestination(player.position);
+        SetAnimationState(1);
+    }
+    void Flee()
+    {
+        Vector3 direction = transform.position - player.position;
+        Vector3 fleePosition = transform.position + direction.normalized * agent.speed;
+
+        agent.SetDestination(fleePosition);
         SetAnimationState(1);
     }
 
@@ -230,25 +241,15 @@ public class AIState : MonoBehaviour
     private void MeleeAttack()
     {
         SetAnimationState(4);
-        StartCoroutine(DelayedTP());
+        Flee();
+        fleeTime += Time.deltaTime;
+        if (fleeTime >= 3f) // Huir durante 3 segundos
+        {
+            isFleeing = false;
+            fleeTime = 0f;
+        }
     }
 
-    private IEnumerator DelayedTP()
-    {
-        // Espera 1 segundo
-        yield return new WaitForSeconds(1);
-
-        // Llama a la función TP
-        TP();
-    }
-    private void TP()
-    {
-        // Calcula la posición de teletransporte
-        Vector3 posicionTP = transform.position - transform.forward * jumpDistance;
-
-        // Teletransporta a tu personaje
-        transform.position = posicionTP;
-    }
 
     private bool CheckForMaxPumpkins()
     {
