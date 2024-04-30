@@ -150,7 +150,7 @@ public class CalabazaController : MonoBehaviour
         Debug.Log("Atacando al player");
         // Calcular la dirección hacia el jugador
         Vector3 dirToPlayer = player.transform.position - transform.position;
-        dirToPlayer.y += 1.5f;
+        //dirToPlayer.y += 1.5f;
         // Rotar el objeto completo hacia esa dirección
         transform.rotation = Quaternion.LookRotation(dirToPlayer);
         if (playerDetected && Time.time >= nextFireTime)

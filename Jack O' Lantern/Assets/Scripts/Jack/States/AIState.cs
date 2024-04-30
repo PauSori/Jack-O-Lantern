@@ -270,7 +270,7 @@ public class AIState : MonoBehaviour
     }
     IEnumerator InvokeEnemies()
     {
-
+        agent.SetDestination(transform.position);
         _isInvoking = true;
         for (int i = 0; i < 2; i++)
         {
@@ -293,12 +293,13 @@ public class AIState : MonoBehaviour
     }
     public void TeleportToTomb()
     {
+        Debug.Log("TPEANDOSE");
         agent.SetDestination(transform.position);
-        if (tombs.Count == 0)
-        {
-            Debug.LogError("No hay tumbas disponibles para teletransporte.");
-            return;
-        }
+        //if (tombs.Count == 0)
+        //{
+        //    Debug.LogError("No hay tumbas disponibles para teletransporte.");
+        //    return;
+        //}
         if (Time.time - lastTeleportTime >= teleportCooldown)
         {
             GameObject randomTomb;
@@ -309,7 +310,7 @@ public class AIState : MonoBehaviour
                 randomTomb = tombs[randomIndex];
 
             }
-            while (randomTomb == lastTomb); // Continúa seleccionando una tumba aleatoria hasta que no sea la misma que la última.
+            while (randomTomb == lastTomb && tombs.Count > 1);
 
             // Teletransporta tu personaje a la tumba seleccionada.
             transform.position = randomTomb.transform.position;
@@ -328,8 +329,9 @@ public class AIState : MonoBehaviour
 
     public bool CheckForTombs()
     {
-        if(tombs.Count <= 0)
+        if(tombs.Count <= 1)
         {
+            Debug.Log("tombs false");
             return false;
         }
         else
