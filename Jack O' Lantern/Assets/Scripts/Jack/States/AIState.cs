@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class AIState : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class AIState : MonoBehaviour
     public float maxHP = 100f;
     public float currentHP;
     int previousHP;
+    public Slider sliderJack;
+
     #endregion
 
     #region Detection Ranges
@@ -56,7 +59,7 @@ public class AIState : MonoBehaviour
     private float lastTeleportTime;
     private GameObject lastTomb;
     public GameObject jackProjectile;
-    public GameObject jackMagicHand;
+    public Transform jackMagicHand;
     public string objectTag = "Tomb";
     #endregion
 
@@ -78,6 +81,7 @@ public class AIState : MonoBehaviour
 
     public void Start()
     {
+        sliderJack = GetComponentInChildren<Slider>();
         currentHP = maxHP;
         startPosition = transform.position;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -90,19 +94,15 @@ public class AIState : MonoBehaviour
         CheckStates();
         CheckForRanges();
         LookAt();
-        if (Input.GetKeyDown(KeyCode.E))
+        if(sliderJack.value <= 0f)
         {
-            currentHP -= 10;
-            if (currentHP < 0)
-            {
-                currentHP = 0;
-            }
+            Destroy(this.gameObject);
         }
     }
     public void CheckStates()
     {
         //MI PERSONAJE ESTA A MITAD DE VIDA
-        if(IsHalfLife(currentHP, maxHP))
+        if(IsHalfLife())
         {
             //COMPROBAR SI HAY TUMBAS
             if (!CheckForTombs())
@@ -184,9 +184,9 @@ public class AIState : MonoBehaviour
     }
     
 
-    public bool IsHalfLife(float vidaActual, float vidaTotal)
+    public bool IsHalfLife()
     {
-        if (vidaActual <= vidaTotal / 2)
+        if (sliderJack.value <= 0.5f)
         {
             return true; // El personaje está a mitad de vida o menos
         }
@@ -293,6 +293,8 @@ public class AIState : MonoBehaviour
     }
     public void TeleportToTomb()
     {
+        agent.SetDestination(transform.position);
+        
         if (Time.time - lastTeleportTime >= teleportCooldown)
         {
             GameObject randomTomb;
@@ -310,7 +312,7 @@ public class AIState : MonoBehaviour
 
             SetAnimationState(4);
             // Instancia el objeto en la posición de la tumba.
-            Instantiate(jackProjectile, spawnPoint.transform.position, Quaternion.identity);
+            Instantiate(jackProjectile, jackMagicHand.position, jackMagicHand.rotation);
 
             // Actualiza el tiempo del último teletransporte y la última tumba.
             lastTeleportTime = Time.time;
@@ -353,6 +355,15 @@ public class AIState : MonoBehaviour
         // Dibuja una esfera verde para el rango largo
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, longRange);
+    }
+
+    void hit()
+    {
+        attackCollider.enabled = true;
+    }
+    void nohit()
+    {
+        attackCollider.enabled = false;
     }
 
 }
