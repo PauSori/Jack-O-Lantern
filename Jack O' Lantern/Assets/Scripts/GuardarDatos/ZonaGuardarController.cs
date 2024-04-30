@@ -20,7 +20,7 @@ public class ZonaGuardarController : MonoBehaviour
     string filePath;
     SaveData saveData;
     //private static readonly string SAVE_FILE = "/player.json";
-    private Transform playerTransform;
+    public Transform playerTransform;
 
     public float rangoGuardar = 5f;
     //void Awake()
