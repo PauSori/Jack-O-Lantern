@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tombs : MonoBehaviour
 {
+    public Slider tombs;
+
+    private void Start()
+    {
+        tombs = GetComponentInChildren<Slider>(); 
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -16,10 +23,17 @@ public class Tombs : MonoBehaviour
         {
             OnDestroy();
         }
+        if(tombs.value <= 0)
+        {
+            OnDestroy();
+
+        }
     }
 
     private void OnDestroy()
     {
         AIState.instance.RemoveGameObject(gameObject);
+        Destroy(gameObject);
     }
+
 }

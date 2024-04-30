@@ -63,8 +63,11 @@ public class AIState : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     private bool isFleeing = false;
     private float fleeTime = 0f;
+    public  bool isAttacking = false;
+    public bool isTeleported = false;
 
     public Animator anim;
+
 
     public static AIState instance;
 
@@ -217,18 +220,20 @@ public class AIState : MonoBehaviour
 
     void Chase()
     {
-        if (isFleeing) return;
+        if (isFleeing || isAttacking || isTeleported) return;
 
         agent.SetDestination(player.position);
         SetAnimationState(1);
+        Debug.Log("Estoy persiguiendo");
     }
     void Flee()
     {
+        Debug.Log("Estoy huyendo");
         Vector3 direction = transform.position - player.position;
         Vector3 fleePosition = transform.position + direction.normalized * agent.speed;
 
         agent.SetDestination(fleePosition);
-        SetAnimationState(1);
+        SetAnimationState(2);
     }
 
     public void LookAt()
@@ -240,14 +245,11 @@ public class AIState : MonoBehaviour
 
     private void MeleeAttack()
     {
-        SetAnimationState(4);
-        Flee();
-        fleeTime += Time.deltaTime;
-        if (fleeTime >= 3f) // Huir durante 3 segundos
-        {
-            isFleeing = false;
-            fleeTime = 0f;
-        }
+        isAttacking = true;
+        Debug.Log("Estoy atacando");
+        SetAnimationState(3);
+        isAttacking = false;
+        //Flee();
     }
 
 
@@ -268,10 +270,11 @@ public class AIState : MonoBehaviour
     }
     IEnumerator InvokeEnemies()
     {
+
         _isInvoking = true;
         for (int i = 0; i < 2; i++)
         {
-            SetAnimationState(2);
+            SetAnimationState(5);
             // Espera hasta que la animación se complete
             yield return new WaitForSeconds(2.028f);
 
@@ -290,10 +293,6 @@ public class AIState : MonoBehaviour
     }
     public void TeleportToTomb()
     {
-        isInMeleeRange = false;
-        isInMidRange = false;
-        isInLongRange = false;
-
         if (Time.time - lastTeleportTime >= teleportCooldown)
         {
             GameObject randomTomb;
@@ -302,21 +301,23 @@ public class AIState : MonoBehaviour
                 // Selecciona una tumba aleatoria.
                 int randomIndex = Random.Range(0, tombs.Count);
                 randomTomb = tombs[randomIndex];
+
             }
             while (randomTomb == lastTomb); // Continúa seleccionando una tumba aleatoria hasta que no sea la misma que la última.
 
             // Teletransporta tu personaje a la tumba seleccionada.
             transform.position = randomTomb.transform.position;
 
-            SetAnimationState(5);
+            SetAnimationState(4);
             // Instancia el objeto en la posición de la tumba.
-            Instantiate(jackProjectile, jackMagicHand.transform.position, Quaternion.identity);
+            Instantiate(jackProjectile, spawnPoint.transform.position, Quaternion.identity);
 
             // Actualiza el tiempo del último teletransporte y la última tumba.
             lastTeleportTime = Time.time;
             lastTomb = randomTomb;
+            isTeleported = true;
         }
-
+        
     }
 
     public bool CheckForTombs()
