@@ -294,7 +294,11 @@ public class AIState : MonoBehaviour
     public void TeleportToTomb()
     {
         agent.SetDestination(transform.position);
-        
+        if (tombs.Count == 0)
+        {
+            Debug.LogError("No hay tumbas disponibles para teletransporte.");
+            return;
+        }
         if (Time.time - lastTeleportTime >= teleportCooldown)
         {
             GameObject randomTomb;
