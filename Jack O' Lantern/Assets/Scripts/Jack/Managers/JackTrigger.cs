@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class JackTrigger : MonoBehaviour
 {
@@ -29,18 +30,24 @@ public class JackTrigger : MonoBehaviour
     {
         if (jack == null)
         {
+            m_EventSystem.SetSelectedGameObject(winbutton);
             final.SetActive (true);
             Time.timeScale = 0.0f;
             Cursor.lockState = CursorLockMode.None;
+            //Invoke("CinematicaFinal", 6.0f);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            m_EventSystem.SetSelectedGameObject(winbutton);
+
             jack.SetActive(true);
             tombs.SetActive(true);
         }
+    }
+    public void CinematicaFinal()
+    {
+        SceneManager.LoadScene("CinematicaFinal");
     }
 }
