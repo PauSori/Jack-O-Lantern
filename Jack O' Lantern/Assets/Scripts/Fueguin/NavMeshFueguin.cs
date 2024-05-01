@@ -14,7 +14,6 @@ public class NavMeshFueguin : MonoBehaviour
     private bool isCooldown = false;
     public float detectionRadius = 8.0f;
     public float detectionObjectRadius = 18.0f;
-    public LayerMask Enemy;
     public LayerMask Objeto;
     public bool areEnemiesNearby = false;
     private Collider closestEnemy = null;
@@ -38,17 +37,17 @@ public class NavMeshFueguin : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (CheckEnemy() == true) // Si detecta un enemigo, entra en modo de combate
-        {
-            CheckCombat = true;
+        //if (CheckEnemy() == true) // Si detecta un enemigo, entra en modo de combate
+        //{
+        //    CheckCombat = true;
 
-            if (CheckCD() == false)
-            {
-                Stun();
-                FollowEnemy();
-            }
-        }
-        else if (CheckObjectInArea() == true) // Si no hay enemigos, verifica si hay un objeto cerca
+        //    if (CheckCD() == false)
+        //    {
+        //        Stun();
+        //        FollowEnemy();
+        //    }
+        //}
+        if (CheckObjectInArea() == true) // Si no hay enemigos, verifica si hay un objeto cerca
         {
             CheckCombat = false;
             FollowObject();
@@ -60,30 +59,30 @@ public class NavMeshFueguin : MonoBehaviour
         }
     }
 
-    private bool CheckEnemy()
-    {
-        Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius, Enemy);
+    //private bool CheckEnemy()
+    //{
+    //    Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius, Enemy);
 
-        if (enemies.Length > 0)
-        {
-            areEnemiesNearby = true;
-            float closestDistanceSqr = Mathf.Infinity;
-            foreach (Collider enemy in enemies)
-            {
-                float distanceSqr = (enemy.transform.position - transform.position).sqrMagnitude;
-                if (distanceSqr < closestDistanceSqr)
-                {
-                    closestDistanceSqr = distanceSqr;
-                    closestEnemy = enemy;
-                }
-            }
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //    if (enemies.Length > 0)
+    //    {
+    //        areEnemiesNearby = true;
+    //        float closestDistanceSqr = Mathf.Infinity;
+    //        foreach (Collider enemy in enemies)
+    //        {
+    //            float distanceSqr = (enemy.transform.position - transform.position).sqrMagnitude;
+    //            if (distanceSqr < closestDistanceSqr)
+    //            {
+    //                closestDistanceSqr = distanceSqr;
+    //                closestEnemy = enemy;
+    //            }
+    //        }
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 
     private bool CheckObjectInArea()
     {
