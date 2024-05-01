@@ -1732,6 +1732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da43933e7f66fd64791b17c0ac96c9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reinciarButton: {fileID: 0}
+  vivo: 1
   healthSlider: {fileID: 0}
   hitPlayerDamage: {fileID: 0}
   gameOver: {fileID: 0}
@@ -4054,7 +4056,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: d8bfca6fc5deb2444bb78f1680e16001, type: 2}
+      objectReference: {fileID: 2100000, guid: 50ce01c1c0bd065468c083b93cef35b3, type: 2}
     - target: {fileID: 7851828293603492458, guid: 7e0946ad8d29f51478e9ecc052693e72,
         type: 3}
       propertyPath: m_Materials.Array.data[3]

@@ -17,6 +17,7 @@ public class PuertaController : MonoBehaviour
     public List<GameObject> enemies = new List<GameObject>();
 
     private CapsuleCollider capsuleCollider;
+    public BoxCollider boxcollider;
 
     public GameObject enemy;
     public int numberOfEnemiesToSpawn = 5;
@@ -38,6 +39,7 @@ public class PuertaController : MonoBehaviour
     {
         ayudaPersona.SetActive(false);
         capsuleCollider = GetComponent<CapsuleCollider>();
+        boxcollider = GetComponent<BoxCollider>();
         Camera.gameObject.SetActive(false);
         animator = GetComponent<Animator>();
     }
@@ -49,6 +51,7 @@ public class PuertaController : MonoBehaviour
         {
             Camera.gameObject.SetActive(true);
             capsuleCollider.enabled = false;
+            boxcollider.enabled = false;
             animator.SetBool("Open", true);
             Invoke("CameraOff", 5f);
         }

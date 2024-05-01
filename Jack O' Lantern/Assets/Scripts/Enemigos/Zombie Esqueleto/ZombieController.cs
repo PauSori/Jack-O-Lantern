@@ -68,11 +68,11 @@ public class ZombieController : MonoBehaviour
 
     }
 
-    private void Hit()
+    private void HitZ()
     {
         hit.SetActive(true);
     }
-    private void NoHit()
+    private void NoHitZ()
     {
         hit.SetActive(false);
     }
