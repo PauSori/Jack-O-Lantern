@@ -12,12 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Cinematica.unity
     guid: a9e8920976736184ab7c31003ce9c468
   - enabled: 1
-    path: Assets/Scenes/Lobby.unity
-    guid: 83141a7fd269798489c791d55e62d1c8
-  - enabled: 1
-    path: Assets/Scenes/PuertaTrigger.unity
-    guid: 3a8405bf3d64e244db390d597f375743
-  - enabled: 1
     path: Assets/Scenes/PruebaMapa.unity
     guid: fca78129300b5834798394326e2bb5d1
   - enabled: 1

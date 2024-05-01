@@ -43597,10 +43597,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 584565240}
   lines:
-  - "SILENCI EST\xDAPIDS !!! "
-  - "Per aix\xF2 vull que aneu als llocs on me la va jugar per debilitar-me i recolliu
-    els objectes per debilitar-lo a ell."
-  - "Ara, marxeu! No vull que torneu per aqu\xED fins que l\u2019h\xE0giu derrotat."
+  - "S\xC9 PERFECTAMENT QUE \xC9S MASSA PODER\xD3S PER A VOSALTRES DOS CUCS !!! "
+  - "Per aix\xF2 vull que aneu als llocs on me la va jugar per debilitar-ho i recolliu
+    els objectes amb una part de la seva \xE0nima, per debilitar-lo a ell."
+  - "Heu de buscar la moneda a la taverna on em va tancar a la butxaca i la poma
+    que em va demanar baixar d'aquell male\xEFt arbre tallat amb creus, el meu foc
+    verd us guiar\xE0"
   textSpeed: 0.06
   booleana: {fileID: 127783202}
 --- !u!114 &1232979796
@@ -82991,8 +82993,8 @@ MonoBehaviour:
     si voleu seguir existin."
   - "Sou els escollits, la vostra exist\xE8ncia \xE9s una oportunitat per demostrar
     la vostra lleialtat i valentia."
-  - "Vull que pareu els peus en Jack, m\u2019est\xE0 prenent les \xE0nimes que em
-    pertanyen i s\u2019est\xE0 descontrolant."
+  - "Sembla que es creu que ell \xE9s el que mana sobre les \xE0nimes ara i se les
+    est\xE0 quedant per a ell tot sol."
   textSpeed: 0.06
   booleana: {fileID: 785949486}
 --- !u!114 &2028730782
