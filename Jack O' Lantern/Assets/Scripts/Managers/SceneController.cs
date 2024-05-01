@@ -33,4 +33,13 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+    public void CinematicaFinal()
+    {
+        SceneManager.LoadScene("CinematicaFinal");
+    }
+    public void MapaGordo()
+    {
+        SceneManager.LoadScene("MapaGordo");
+
+    }
 }

@@ -1542,15 +1542,15 @@ MonoBehaviour:
     m_ItemSetName: 
     m_Index: 0
   m_DefaultLoadout:
-  - ItemDefinition: {fileID: 4339429099134251468, guid: 1a382e0640df7bf4184f79e795a7f0cd,
-      type: 2}
-    Amount: 1
   - ItemDefinition: {fileID: 6969474177885602789, guid: 1a382e0640df7bf4184f79e795a7f0cd,
       type: 2}
     Amount: 1
   - ItemDefinition: {fileID: -4068462069690389759, guid: 1a382e0640df7bf4184f79e795a7f0cd,
       type: 2}
     Amount: 1000
+  - ItemDefinition: {fileID: 4339429099134251468, guid: 1a382e0640df7bf4184f79e795a7f0cd,
+      type: 2}
+    Amount: 1
   m_RemoveExceptions: []
 --- !u!114 &8516736648679915827
 MonoBehaviour:
@@ -1758,9 +1758,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2.5029633
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.7514814, z: 0}
 --- !u!1 &6525926784170566071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3974,6 +3974,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WF_LP_HT_Environment_StreetLamp (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8bac5b6914963584aa19e7d9438d421d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -4061,7 +4066,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 2100000, guid: d8bfca6fc5deb2444bb78f1680e16001, type: 2}
+      objectReference: {fileID: 2100000, guid: 50ce01c1c0bd065468c083b93cef35b3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4081,6 +4086,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4556406567362136698}
     m_Modifications:
+    - target: {fileID: 3882342727151202670, guid: 2b09f91df5c592341b2f73f1eeba7ba3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882342727523821819, guid: 2b09f91df5c592341b2f73f1eeba7ba3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882342727967686299, guid: 2b09f91df5c592341b2f73f1eeba7ba3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 3882342728394611854, guid: 2b09f91df5c592341b2f73f1eeba7ba3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4135,6 +4155,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RW_LP_VP_Effect_Fire (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882342728394611855, guid: 2b09f91df5c592341b2f73f1eeba7ba3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882342728664147428, guid: 2b09f91df5c592341b2f73f1eeba7ba3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5516437701137439237, guid: 2b09f91df5c592341b2f73f1eeba7ba3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597043906772226636, guid: 2b09f91df5c592341b2f73f1eeba7ba3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
