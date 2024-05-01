@@ -82559,8 +82559,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 562984670}
   lines:
-  - Perfecte, has acabat amb el Jack
-  - "Ara ningn\xFA hem robara mes almes"
+  - Perfecte, l'heu pogut derrotar, s'ha acabat el reinat d'en Jack
+  - " Ara ning\xFA podra tornar a robarme el que hem pertany"
   textSpeed: 0.06
   booleana: {fileID: 785949486}
 --- !u!114 &2028730782
