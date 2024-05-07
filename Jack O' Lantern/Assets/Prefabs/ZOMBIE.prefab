@@ -930,8 +930,8 @@ MonoBehaviour:
   - {fileID: 2663656037524464786}
   - {fileID: 7949395744562689615}
   - {fileID: 8329277682993149383}
-  patrolSpeed: 1
-  chaseSpeed: 2
+  patrolSpeed: 2
+  chaseSpeed: 4
   detectionRange: 10
   detectionAngle: 70.5
   attackRange: 2

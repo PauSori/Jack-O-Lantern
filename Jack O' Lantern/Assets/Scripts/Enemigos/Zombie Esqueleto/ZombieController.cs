@@ -51,7 +51,6 @@ public class ZombieController : MonoBehaviour
         {
             case Zombie.Patrolling:
                 Patrol();
-                
                 break;
             case Zombie.Chasing:
                 ChasePlayer();
@@ -70,6 +69,7 @@ public class ZombieController : MonoBehaviour
 
     private void HitZ()
     {
+        //Sonido de golpe o arañazo
         hit.SetActive(true);
     }
     private void NoHitZ()
@@ -93,12 +93,13 @@ public class ZombieController : MonoBehaviour
         if (angleToPlayer < detectionAngle / 2f && dirToPlayer.magnitude < detectionRange && 
             Vector3.Distance(transform.position, player.position) < detectionRange)
         {
-            
+            //Poner sonido de detección
             currentState = Zombie.Chasing;
             playerDetected = true;
         }
         if (slider.value < 1f && Vector3.Distance(transform.position, player.position) < detectionRange)
         {
+            //Poner sonido de detección
             currentState = Zombie.Chasing;
             playerDetected = true;
         }
