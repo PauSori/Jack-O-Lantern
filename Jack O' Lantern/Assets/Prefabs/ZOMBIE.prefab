@@ -1535,7 +1535,9 @@ MonoBehaviour:
   hit: {fileID: 3981200573042032981}
   audioAttack: {fileID: 8300000, guid: 8df7720604db799439a7f4fff59a1b7b, type: 3}
   audioAlert: {fileID: 8300000, guid: 6a1f752f118a2594b89e6823826b310d, type: 3}
+  audioMuerte: {fileID: 8300000, guid: 2be20d003083a824fa47facbe8b998c3, type: 3}
   canvasHealth: {fileID: 0}
+  capsuleCollider: {fileID: 0}
 --- !u!136 &7371923445600083260
 CapsuleCollider:
   m_ObjectHideFlags: 0

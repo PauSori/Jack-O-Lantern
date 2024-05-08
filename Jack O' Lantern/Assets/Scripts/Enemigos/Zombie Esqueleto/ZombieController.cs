@@ -27,10 +27,11 @@ public class ZombieController : MonoBehaviour
 
     public AudioClip audioAttack;
     public AudioClip audioAlert;
+    public AudioClip audioMuerte;
+    //public AudioClip audioPatrol;
 
     public Canvas canvasHealth;
     public CapsuleCollider capsuleCollider;
-    //public AudioClip audioPatrol;
 
     private enum Zombie
     {
@@ -71,6 +72,7 @@ public class ZombieController : MonoBehaviour
         }
         if (slider.value <= 0)
         {
+            GetComponent<AudioSource>().PlayOneShot(audioMuerte);
             Debug.Log("Muerto");
             animator.enabled = false;
             canvasHealth.enabled = false;
