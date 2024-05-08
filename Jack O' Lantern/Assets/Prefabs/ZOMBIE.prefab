@@ -933,7 +933,7 @@ MonoBehaviour:
   patrolSpeed: 2
   chaseSpeed: 4
   detectionRange: 10
-  detectionAngle: 70.5
+  detectionAngle: 100
   attackRange: 2
   playerDetected: 0
   parentObject: {fileID: 6852101146934733629}
