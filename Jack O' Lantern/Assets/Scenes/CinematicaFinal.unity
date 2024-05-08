@@ -25227,8 +25227,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Texto de ejemplo
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6cb2a5974695d174d8386feb70578a99, type: 2}
-  m_sharedMaterial: {fileID: -2552682706094719216, guid: 6cb2a5974695d174d8386feb70578a99,
+  m_fontAsset: {fileID: 11400000, guid: 56523241c1f48284d8e6bc7a3193b051, type: 2}
+  m_sharedMaterial: {fileID: 794138783026144577, guid: 56523241c1f48284d8e6bc7a3193b051,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
