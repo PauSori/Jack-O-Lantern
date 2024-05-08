@@ -1581,8 +1581,8 @@ MonoBehaviour:
       m_Default: 1
     m_Name: Health
     m_MinValue: 0
-    m_MaxValue: 40
-    m_Value: 40
+    m_MaxValue: 80
+    m_Value: 80
     m_AutoUpdateValueType: 0
     m_UpdateWhenInactive: 0
     m_AutoUpdateStartDelay: 1
