@@ -469,15 +469,15 @@ Transform:
   m_GameObject: {fileID: 419011818678926663}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.055821486, z: -0, w: 0.9984408}
-  m_LocalPosition: {x: -5.97, y: 0.59962523, z: -6.23}
-  m_LocalScale: {x: 0.62460965, y: 0.62460965, z: 0.62460965}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2642868125189952490}
   - {fileID: 2763146229710158495}
   - {fileID: 4183561900983670846}
   - {fileID: 1218835538368056958}
-  m_Father: {fileID: 7124169939308456260}
+  m_Father: {fileID: 1388573207690718436}
   m_LocalEulerAnglesHint: {x: 0, y: 6.4, z: 0}
 --- !u!95 &4889975228163839414
 Animator:
@@ -563,7 +563,7 @@ MonoBehaviour:
   hit: {fileID: 1747698884282154723}
   audioAttack: {fileID: 8300000, guid: 3d49f12bcc0f07d40916ebc18a65ee7a, type: 3}
   audioAlert: {fileID: 8300000, guid: e7304ad305cf6a3409b6cac37d468480, type: 3}
-  audioMuerte: {fileID: 8300000, guid: a09738c3bdf07894ebe4dd63a463ea5e, type: 3}
+  audioMuerte: {fileID: 8300000, guid: 2be20d003083a824fa47facbe8b998c3, type: 3}
   canvasHealth: {fileID: 0}
   capsuleCollider: {fileID: 0}
 --- !u!136 &7420350616606132015
@@ -1427,6 +1427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5470767871326222193}
   - {fileID: 7124169939308456260}
   - {fileID: 4356506981978003399}
   - {fileID: 3631230233246478796}
@@ -4293,8 +4294,7 @@ Transform:
   m_LocalPosition: {x: 9.557969, y: -0.96, z: 9.97423}
   m_LocalScale: {x: 1.601, y: 1.601, z: 1.601}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5470767871326222193}
+  m_Children: []
   m_Father: {fileID: 1388573207690718436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9110296522503732048
