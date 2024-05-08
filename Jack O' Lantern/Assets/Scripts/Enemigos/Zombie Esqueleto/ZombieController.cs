@@ -27,6 +27,9 @@ public class ZombieController : MonoBehaviour
 
     public AudioClip audioAttack;
     public AudioClip audioAlert;
+
+    public Canvas canvasHealth;
+    public CapsuleCollider capsuleCollider;
     //public AudioClip audioPatrol;
 
     private enum Zombie
@@ -41,6 +44,8 @@ public class ZombieController : MonoBehaviour
     {
         slider = GetComponentInChildren<Slider>();
         agent = GetComponent<NavMeshAgent>();
+        canvasHealth = GetComponentInChildren<Canvas>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         currentState = Zombie.Patrolling;
         SetDestinationToNextPatrolPoint();
@@ -67,7 +72,12 @@ public class ZombieController : MonoBehaviour
         if (slider.value <= 0)
         {
             Debug.Log("Muerto");
-            OnDestroy();
+            animator.enabled = false;
+            canvasHealth.enabled = false;
+            capsuleCollider.enabled = false;
+            agent.SetDestination(transform.position);
+            Invoke("OnDestroy", 5f);
+            //OnDestroy();
         }
 
     }
