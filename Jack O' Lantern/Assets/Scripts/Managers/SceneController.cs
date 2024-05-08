@@ -42,4 +42,9 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("MapaGordo");
 
     }
+    public void Controls()
+    {
+        SceneManager.LoadScene("Controls");
+
+    }
 }
