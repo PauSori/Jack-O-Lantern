@@ -12,6 +12,9 @@ public class JackTrigger : MonoBehaviour
     public GameObject final;
     public GameObject jack;
     public GameObject tombs;
+
+    public BoxCollider col;
+    private AudioSource audioS;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -23,6 +26,9 @@ public class JackTrigger : MonoBehaviour
         jack.SetActive(false);
         tombs.SetActive(false);
         final.SetActive(false);
+        audioS = GetComponent<AudioSource>();
+        col = GetComponent<BoxCollider>();
+
     }
 
     // Update is called once per frame
@@ -41,9 +47,10 @@ public class JackTrigger : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-
+            audioS.Play();
             jack.SetActive(true);
             tombs.SetActive(true);
+            col.enabled = false;
         }
     }
     public void CinematicaFinal()
