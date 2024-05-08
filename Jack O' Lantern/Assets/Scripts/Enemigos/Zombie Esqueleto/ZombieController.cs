@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class ZombieController : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class ZombieController : MonoBehaviour
 
     public Animator animator;
     public GameObject hit;
+
+    public AudioClip audioAttack;
+    public AudioClip audioAlert;
+    //public AudioClip audioPatrol;
 
     private enum Zombie
     {
@@ -69,7 +74,7 @@ public class ZombieController : MonoBehaviour
 
     private void HitZ()
     {
-        //Sonido de golpe o arañazo
+        GetComponent<AudioSource>().PlayOneShot(audioAttack);
         hit.SetActive(true);
     }
     private void NoHitZ()
@@ -93,15 +98,15 @@ public class ZombieController : MonoBehaviour
         if (angleToPlayer < detectionAngle / 2f && dirToPlayer.magnitude < detectionRange && 
             Vector3.Distance(transform.position, player.position) < detectionRange)
         {
-            //Poner sonido de detección
             currentState = Zombie.Chasing;
             playerDetected = true;
+            GetComponent<AudioSource>().PlayOneShot(audioAlert);
         }
         if (slider.value < 1f && Vector3.Distance(transform.position, player.position) < detectionRange)
         {
-            //Poner sonido de detección
             currentState = Zombie.Chasing;
             playerDetected = true;
+            GetComponent<AudioSource>().PlayOneShot(audioAlert);
         }
         //if(Vector3.Distance(transform.position, player.position) < detectionRange)
         //{
@@ -125,7 +130,6 @@ public class ZombieController : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, player.position) > detectionRange)
         {
-            
             currentState = Zombie.Patrolling;
             playerDetected = false;
         }
