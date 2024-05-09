@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/PruebaMapa.unity
     guid: fca78129300b5834798394326e2bb5d1
   - enabled: 1
-    path: Assets/Scenes/MapaGordoMalo.unity
-    guid: 09b19b5451297344694bc2f4097a798a
+    path: Assets/Scenes/MapaGordo.unity
+    guid: 4712cad882bb30a47af3211508bc437b
   - enabled: 1
     path: Assets/Scenes/CinematicaFinal.unity
     guid: 39236c8baaf406449a27d48ca753838b
