@@ -1,3 +1,4 @@
+using Opsive.UltimateCharacterController.Character.Abilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,182 +6,65 @@ using UnityEngine.AI;
 
 public class NavMeshFueguin : MonoBehaviour
 {
-    public GameObject panelSeñal;
     public Transform player;
-    public float speed = 2.0f;
-    public Vector3 offset = new Vector3(1, 0, 0);
-    public bool CheckCombat = false;
-    public bool objectInArea = false;
-    private bool isCooldown = false;
-    public float detectionRadius = 8.0f;
-    public float detectionObjectRadius = 18.0f;
-    public LayerMask Enemigo;
-    public LayerMask Objeto;
-    public bool areEnemiesNearby = false;
-    private Collider closestEnemy = null;
-    private Collider closestObject;
-    public GameObject Player; // NUEVO IMPLEMENTADO // Nueva variable para la distancia máxima
+    public Transform fueguinPoint; // Añade el punto al que se teletransportará
+    public float followSpeed = 5f;
+    public float followDistance = 2f;
+    public float floatHeight = 0.5f;
+    public float floatSpeed = 1f;
+    public float teleportRange = 5f; // Rango para teletransportarse
 
-    private NavMeshAgent agent; // Agregado para el uso de NavMesh
+    private float originalY;
+    private bool isTeleported = false; // Para saber si se ha teletransportado
+    private float teleportTime = 10f; // Tiempo que estará teletransportado
+    private float currentTime = 0f; // Contador de tiempo
 
-    private void Start()
+    void Start()
     {
-        panelSeñal.SetActive(false);
-        agent = GetComponent<NavMeshAgent>(); // Inicialización del NavMeshAgent
+        originalY = transform.position.y;
     }
 
     void Update()
     {
-        CheckStates();
-    }
-
-    void CheckStates()
-    {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (CheckEnemy() == true) // Si detecta un enemigo, entra en modo de combate
+        if (isTeleported)
         {
-            CheckCombat = true;
-
-            if (CheckCD() == false)
+            currentTime += Time.deltaTime;
+            if (currentTime >= teleportTime)
             {
-                Stun();
-                FollowEnemy();
+                isTeleported = false;
+                currentTime = 0f;
             }
         }
-        if (CheckObjectInArea() == true) // Si no hay enemigos, verifica si hay un objeto cerca
-        {
-            CheckCombat = false;
-            FollowObject();
-        }
         else
         {
-            CheckCombat = false;
-            FollowPlayer();
-        }
-    }
-
-    private bool CheckEnemy()
-    {
-        Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius, Enemigo);
-
-        if (enemies.Length > 0)
-        {
-            areEnemiesNearby = true;
-            float closestDistanceSqr = Mathf.Infinity;
-            foreach (Collider enemy in enemies)
+            // Calcula la distancia al punto
+            float distanceToFueguinPoint = Vector3.Distance(transform.position, fueguinPoint.position);
+            if (distanceToFueguinPoint <= teleportRange)
             {
-                float distanceSqr = (enemy.transform.position - transform.position).sqrMagnitude;
-                if (distanceSqr < closestDistanceSqr)
-                {
-                    closestDistanceSqr = distanceSqr;
-                    closestEnemy = enemy;
-                }
+                isTeleported = true;
+                transform.position = fueguinPoint.position; // Se teletransporta al punto
             }
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private bool CheckObjectInArea()
-    {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        Collider[] objects = Physics.OverlapSphere(transform.position, detectionObjectRadius, Objeto);
-
-        if (objects.Length > 0 )
-        {
-            Debug.Log("Objeto encontrado");
-            Debug.Log("Distancetoplayer:" + distanceToPlayer);
-            panelSeñal.SetActive(true);
-            objectInArea = true;
-            float closestDistanceSqr = Mathf.Infinity;
-            foreach (Collider obj in objects)
+            else
             {
-                float distanceSqr = (obj.transform.position - transform.position).sqrMagnitude;
-                if (distanceSqr < closestDistanceSqr)
-                {
-                    closestDistanceSqr = distanceSqr;
-                    closestObject = obj;
-                }
+                FollowPlayer();
             }
-            return true;
-        }
-        else
-        {
-            Debug.Log("Sin objeto");
-
-            objectInArea = false;
-            return false;
         }
     }
 
-    private void FollowObject()
+    public void FollowPlayer()
     {
-        if (closestObject != null)
-        {
-            Vector3 newPos = closestObject.transform.position + offset;
-            agent.SetDestination(newPos); // Usamos NavMesh para mover al personaje
-        }
-        else
-        {
-            FollowPlayer();
-        }
-    }
+        Vector3 direction = (player.position - transform.position).normalized;
 
-    private void FollowPlayer()
-    {
-        Debug.Log("dins follow player");
-        panelSeñal.SetActive(false);
-        Vector3 newPos = player.position + offset;
-        agent.SetDestination(newPos); // Usamos NavMesh para mover al personaje
-    }
+        Vector3 desiredPosition = player.position - direction * followDistance;
 
-    private void FollowEnemy()
-    {
-        if (closestEnemy != null)
-        {
-            Vector3 newPos = closestEnemy.transform.position + offset;
-            agent.SetDestination(newPos); // Usamos NavMesh para mover al personaje
-        }
-        else
-        {
-            FollowPlayer(); // Si el enemigo desaparece, sigue al jugador
-        }
-    }
+        desiredPosition.y = originalY + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
 
-    private void Stun()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            StartCoroutine(Cooldown());
-            FollowPlayer(); // Agrega esta línea
-        }
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
     }
-
-    private bool CheckCD()
-    {
-        return isCooldown;
-    }
-
-    private IEnumerator Cooldown()
-    {
-        isCooldown = true;
-        yield return new WaitForSeconds(5);
-        isCooldown = false;
-    }
-
-    //Areas
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, detectionObjectRadius);
-
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, teleportRange);
     }
+
 }
