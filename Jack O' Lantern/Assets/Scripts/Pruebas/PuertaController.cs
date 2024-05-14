@@ -80,7 +80,7 @@ public class PuertaController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            shouldResetEnemies = true;
+            //shouldResetEnemies = true;
             capsuleCollider.enabled = false;
             ayudaPersona.SetActive(true);
         }
