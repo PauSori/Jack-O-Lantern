@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class NavMeshFueguin : MonoBehaviour
 {
     public Transform player;
-    public Transform fueguinPoint; // Añade el punto al que se teletransportará
+    public List<Transform> fueguinPoints; // Lista de puntos a los que se teletransportará
     public float followSpeed = 5f;
     public float followDistance = 2f;
     public float floatHeight = 0.5f;
@@ -16,8 +16,9 @@ public class NavMeshFueguin : MonoBehaviour
 
     private float originalY;
     private bool isTeleported = false; // Para saber si se ha teletransportado
-    private float teleportTime = 10f; // Tiempo que estará teletransportado
+    private float teleportTime = 2f; // Tiempo que estará teletransportado
     private float currentTime = 0f; // Contador de tiempo
+    private int currentPointIndex = 0; // Índice del punto actual
 
     void Start()
     {
@@ -25,6 +26,21 @@ public class NavMeshFueguin : MonoBehaviour
     }
 
     void Update()
+    {
+        Teleport();
+    }
+
+    public void FollowPlayer()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+
+        Vector3 desiredPosition = player.position - direction * followDistance;
+
+        desiredPosition.y = originalY + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
+
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
+    }
+    public void Teleport()
     {
         if (isTeleported)
         {
@@ -38,11 +54,17 @@ public class NavMeshFueguin : MonoBehaviour
         else
         {
             // Calcula la distancia al punto
-            float distanceToFueguinPoint = Vector3.Distance(transform.position, fueguinPoint.position);
+            float distanceToFueguinPoint = Vector3.Distance(transform.position, fueguinPoints[currentPointIndex].position);
             if (distanceToFueguinPoint <= teleportRange)
             {
                 isTeleported = true;
-                transform.position = fueguinPoint.position; // Se teletransporta al punto
+                transform.position = fueguinPoints[currentPointIndex].position; // Se teletransporta al punto
+                Debug.Log("Diálogo " + (currentPointIndex + 1));
+                fueguinPoints.RemoveAt(currentPointIndex); // Elimina el punto de la lista
+                if (fueguinPoints.Count > 0) // Si aún quedan puntos, pasa al siguiente
+                {
+                    currentPointIndex %= fueguinPoints.Count;
+                }
             }
             else
             {
@@ -50,21 +72,10 @@ public class NavMeshFueguin : MonoBehaviour
             }
         }
     }
-
-    public void FollowPlayer()
-    {
-        Vector3 direction = (player.position - transform.position).normalized;
-
-        Vector3 desiredPosition = player.position - direction * followDistance;
-
-        desiredPosition.y = originalY + Mathf.Sin(Time.time * floatSpeed) * floatHeight;
-
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, followSpeed * Time.deltaTime);
-    }
     void OnDrawGizmosSelected()
     {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, teleportRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, teleportRange);
     }
 
 }

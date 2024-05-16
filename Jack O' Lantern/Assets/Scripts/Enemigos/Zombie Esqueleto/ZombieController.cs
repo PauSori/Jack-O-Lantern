@@ -96,7 +96,6 @@ public class ZombieController : MonoBehaviour
 
     private void Patrol()
     {
-        Debug.Log("Patrol");
         agent.speed = patrolSpeed;
         if (agent.remainingDistance < 0.5f)
             SetDestinationToNextPatrolPoint();
@@ -129,7 +128,6 @@ public class ZombieController : MonoBehaviour
 
     private void ChasePlayer()
     {
-        Debug.Log("Chase");
         agent.speed = chaseSpeed;
         agent.SetDestination(player.position);
         animator.SetBool("walk", false);
