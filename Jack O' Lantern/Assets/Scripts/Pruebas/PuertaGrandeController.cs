@@ -10,6 +10,7 @@ public class PuertaGrandeController : MonoBehaviour
     private Animator animator;
 
     public GameObject moneda;
+    public GameObject monedaSkeleto;
     public GameObject panel;
     public GameObject panelMoneda;
     public bool monedaPillada;
@@ -20,6 +21,7 @@ public class PuertaGrandeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        monedaSkeleto.SetActive(false);
         panel.SetActive(false);
         panelMoneda.SetActive(false);
         animator = GetComponent<Animator>();
@@ -53,13 +55,15 @@ public class PuertaGrandeController : MonoBehaviour
     {
         if (other.CompareTag("Player") && !monedaPillada)
         {
-            panel.SetActive(true);
+            //panel.SetActive(true);
         }
         if (other.CompareTag("Player") && monedaPillada)
         {
             panelMoneda.SetActive(true);
             animator.SetBool("Open", true);
             capsuleCollider.enabled = false;
+            monedaSkeleto.SetActive(true);
+
 
         }
     }

@@ -16,7 +16,7 @@ public class NavMeshFueguin : MonoBehaviour
 
     private float originalY;
     private bool isTeleported = false; // Para saber si se ha teletransportado
-    private float teleportTime = 2f; // Tiempo que estará teletransportado
+    public float teleportTime = 2f; // Tiempo que estará teletransportado
     private float currentTime = 0f; // Contador de tiempo
     private int currentPointIndex = 0; // Índice del punto actual
 
