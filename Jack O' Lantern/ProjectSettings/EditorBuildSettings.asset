@@ -6,23 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: 30e5339bb77f92d4fbb05c4381248c0c
-  - enabled: 1
-    path: Assets/Scenes/Controls.unity
-    guid: 87483c7e977758f43ad0525fd695d407
-  - enabled: 1
-    path: Assets/Scenes/Cinematica.unity
-    guid: a9e8920976736184ab7c31003ce9c468
-  - enabled: 1
-    path: Assets/Scenes/PruebaMapa.unity
-    guid: fca78129300b5834798394326e2bb5d1
-  - enabled: 1
-    path: Assets/Scenes/MapaGordo.unity
-    guid: 4712cad882bb30a47af3211508bc437b
-  - enabled: 1
-    path: Assets/Scenes/CinematicaFinal.unity
-    guid: 39236c8baaf406449a27d48ca753838b
+    path: Assets/Scenes/VR/VR.unity
+    guid: 12854aaeffe204c42bb797040b3df2e1
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: b32a23a0d7d795b498f090b00b8bd880,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
       type: 2}
